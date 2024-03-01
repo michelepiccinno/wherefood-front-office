@@ -101,16 +101,15 @@ section {
 
     .burger-bg {
 
-        // background-image: url(cee452e7a99c5571c6ce793f80090c29.jpg);
-        background-image: url(best-twink-4k-blowjob-compilation-video.jpg);
+        background-image: url(cee452e7a99c5571c6ce793f80090c29.jpg);
         background-size: cover;
         background-position: bottom;
 
     }
 
     .pizza-bg {
-        //background-image: url(AdobeStock_636302609-1.webp);
-        background-image: url(gaybun.jpg);
+        background-image: url(AdobeStock_636302609-1.webp);
+
 
         background-size: cover;
         background-position: bottom;

@@ -1,7 +1,7 @@
 <script>
-import AppComponent from "./components/AppComponent.vue"
+
 import AppHeader from "./components/AppHeader.vue";
-import AppJumbo from "./components/AppJumbo.vue";
+
 import axios from 'axios'; //importo Axios
 import { store } from "./store.js" //state management
 
@@ -10,9 +10,9 @@ import { store } from "./store.js" //state management
 
 export default {
 	components: {
-		AppComponent,
+
 		AppHeader,
-		AppJumbo
+
 
 	},
 	data() {
@@ -38,12 +38,16 @@ export default {
 </script>
 
 <template>
-	<section>
-		<header>
-			<AppHeader />
-			<AppJumbo />
-		</header>
-	</section>
+	<header>
+		<AppHeader />
+
+	</header>
+	<router-view>
+
+	</router-view>
+	<footer>
+
+	</footer>
 </template>
 
 <style lang="scss">
@@ -56,7 +60,7 @@ export default {
 // @use './styles/partials/variables' as *;
 
 // ...qui eventuale SCSS di App.vue
-section {
+header {
 	background: rgba(0, 0, 0, 0.678);
 
 

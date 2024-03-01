@@ -1,12 +1,19 @@
 <script>
 import AppComponent from "./components/AppComponent.vue"
-
+import AppHeader from "./components/AppHeader.vue";
+import AppJumbo from "./components/AppJumbo.vue";
 import axios from 'axios'; //importo Axios
 import { store } from "./store.js" //state management
 
+
+
+
 export default {
 	components: {
-		AppComponent
+		AppComponent,
+		AppHeader,
+		AppJumbo
+
 	},
 	data() {
 		return {
@@ -31,11 +38,12 @@ export default {
 </script>
 
 <template>
-	<main>
-		<AppComponent />
-
-		<button class="btn btn-primary">Primary button</button>
-	</main>
+	<section>
+		<header>
+			<AppHeader />
+			<AppJumbo />
+		</header>
+	</section>
 </template>
 
 <style lang="scss">
@@ -48,6 +56,13 @@ export default {
 // @use './styles/partials/variables' as *;
 
 // ...qui eventuale SCSS di App.vue
+section {
+	background: rgba(0, 0, 0, 0.678);
+
+
+}
+
+
 main {
 	padding: 1rem;
 }

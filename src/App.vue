@@ -23,11 +23,15 @@ export default {
 	mounted() {
 		this.doThings();
 
-		// axios.get("indirizzo").then(risultato => {
-		// 	console.log(risultato);
-		// }).catch(errore => {
-		// 	console.error(errore);
-		// });
+		let url = this.store.apiUrl + this.store.apiRestaurants;
+
+		axios.get(url).then(risultato => {
+			this.store.restaurantsArray = risultato.data.results;
+
+			console.log(risultato);
+		}).catch(errore => {
+			console.error(errore);
+		});
 	},
 	methods: {
 		doThings() {

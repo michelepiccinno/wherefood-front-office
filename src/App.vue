@@ -37,6 +37,7 @@ export default {
 		doThings() {
 			console.log("App.vue does things");
 		}
+
 	}
 }
 </script>

@@ -36,7 +36,7 @@ export default {
                             category.name }}</span>
                     </div>
                     <div class="__detail">
-                        <button>Menu</button>
+                        <button class="btn btn-primary" @click="showProducts(restaurant.id)">Menu</button>
                     </div>
                 </div>
             </a>

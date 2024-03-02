@@ -6,7 +6,12 @@ export default {
     name: "AppHeader",
     data() {
         return {
+            isCartOpen: false,
             store
+        }
+    }, methods: {
+        toggleCart() {
+            this.isCartOpen = !this.isCartOpen;
         }
     }
 }
@@ -35,6 +40,24 @@ export default {
             <button><i class="fa-regular fa-user"><span></span></i></button>
             <button><i class="fa-solid fa-right-to-bracket"><span></span></i></button>
             <button><i class="fa-solid fa-cart-shopping"><span></span></i></button>
+            <button><i class="fa-regular fa-user"><span>Account</span></i></button>
+            <button><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
+            <button @click="toggleCart"><i class="fa-solid fa-cart-shopping"><span>Carrello</span></i></button>
+
+            <!-- Offcanvas del carrello -->
+            <div class="offcanvas offcanvas-end" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">Il tuo carrello</h5>
+                    <button @click="toggleCart" type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                        aria-label="Close">X</button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul v-if="store.cartItems.length > 0">
+                        <li v-for="(item, index) in store.cartItems" :key="index">{{ item.name }} - {{ item.price }}</li>
+                    </ul>
+                    <p v-else>Il carrello è vuoto</p>
+                </div>
+            </div>
 
         </div>
 

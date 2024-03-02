@@ -23,10 +23,22 @@ export default {
 	mounted() {
 		this.doThings();
 
-		let url = this.store.apiUrl + this.store.apiRestaurants;
+		//RestaurantsApi to restaurantsArray on store
+		let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants;
 
-		axios.get(url).then(risultato => {
+		axios.get(restaurantsUrl).then(risultato => {
 			this.store.restaurantsArray = risultato.data.results;
+
+			console.log(risultato);
+		}).catch(errore => {
+			console.error(errore);
+		});
+
+		//RestaurantsApi to restaurantsArray on store
+		let categoriesUrl = this.store.apiUrl + this.store.apiCategories;
+
+		axios.get(categoriesUrl).then(risultato => {
+			this.store.categoriesArray = risultato.data.results;
 
 			console.log(risultato);
 		}).catch(errore => {

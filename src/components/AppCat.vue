@@ -74,7 +74,9 @@ export default {
 .bg-cat {
     width: 100%;
 
-    background-image: url(menus.webp);
+    //background-image: url(menus.webp);
+    background-image: url(black-tile.jpg);
+
     background-size: cover;
     background-position: center;
 
@@ -93,12 +95,12 @@ export default {
 }
 
 .up-wrapper {
-    background-color: rgba(49, 39, 4, 0.829);
+    background-color: rgba(0, 0, 0, 0.500);
     margin: 0;
 }
 
 .wrapper {
-    background-color: rgba(49, 39, 4, 0.829);
+    background-color: rgba(0, 0, 0, 0.500);
     margin: 0 auto;
     min-height: 25vh;
     display: flex;
@@ -123,7 +125,7 @@ export default {
 }
 
 .title-wrap {
-    background-color: rgb(255, 54, 54);
+    background-color: rgb(59, 59, 59);
     font-family: "Playfair Display", serif;
     font-style: italic;
     color: rgb(255, 255, 255);
@@ -133,7 +135,7 @@ export default {
     vertical-align: middle;
     text-align: center;
 
-    bottom: 30px;
+    bottom: 25px;
 
 
     .cat-name {

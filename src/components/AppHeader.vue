@@ -37,9 +37,7 @@ export default {
 
         </div>
         <div>
-            <button><i class="fa-regular fa-user"><span></span></i></button>
-            <button><i class="fa-solid fa-right-to-bracket"><span></span></i></button>
-            <button><i class="fa-solid fa-cart-shopping"><span></span></i></button>
+
             <button><i class="fa-regular fa-user"><span>Account</span></i></button>
             <button><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
             <button @click="toggleCart"><i class="fa-solid fa-cart-shopping"><span>Carrello</span></i></button>
@@ -208,10 +206,16 @@ img {
 
 .offcanvas-body {
     background-color: #000000;
+    color: #575756;
 }
 
 .offcanvas-header {
     background-color: #000000;
+    color: #575756;
+}
+
+.btn-close {
+    color: white;
 }
 
 .round-img {

@@ -1,7 +1,7 @@
 <script>
 import { store } from "../store.js" //state management
 import register from "../debug" //per debuggare il componente da console
-
+import AppCat from "../components/AppCat.vue"
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -15,7 +15,8 @@ export default {
     name: "AppJumbo",
     components: {
         Swiper,
-        SwiperSlide
+        SwiperSlide,
+        AppCat
     },
     data() {
         return {
@@ -53,6 +54,9 @@ export default {
             <swiper-slide class="opacity jap-bg"></swiper-slide>
 
         </swiper>
+    </section>
+    <section>
+        <AppCat />
     </section>
 </template>
 

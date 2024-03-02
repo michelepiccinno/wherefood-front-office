@@ -24,22 +24,14 @@ export default {
         </div>
         <div>
 
-            <div class="search__container d-flex">
+            <div class="search__container">
 
 
-                <input class="search__input" type="text" placeholder="Cerca per nome" @keyup.enter="">
-
+                <input class="search__input" type="text" placeholder="Cerca">
             </div>
-
-
-
-
 
         </div>
         <div>
-            <button><i class="fa-regular fa-user"><span></span></i></button>
-            <button><i class="fa-solid fa-right-to-bracket"><span></span></i></button>
-            <button><i class="fa-solid fa-cart-shopping"><span></span></i></button>
             <button><i class="fa-regular fa-user"><span>Account</span></i></button>
             <button><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
             <button @click="toggleCart"><i class="fa-solid fa-cart-shopping"><span>Carrello</span></i></button>
@@ -96,7 +88,7 @@ export default {
     }
 
     span {
-
+        display: none;
         line-height: 25px;
         font-size: 8px;
         padding: 0.5rem;
@@ -190,34 +182,5 @@ img {
             background-position: 100% center;
         }
     }
-}
-
-.search-btn {
-    padding-left: 1rem;
-
-    color: #646464;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 18px;
-
-    .search-btn:hover {
-        color: #53fc5b !important;
-        border-bottom: 1px solid #53fc5b !important;
-    }
-}
-
-.offcanvas-body {
-    background-color: #000000;
-}
-
-.offcanvas-header {
-    background-color: #000000;
-}
-
-.round-img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background-color: #53fc5b;
 }
 </style>

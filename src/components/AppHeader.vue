@@ -24,20 +24,14 @@ export default {
         </div>
         <div>
 
-            <div class="search__container d-flex">
+            <div class="search__container">
 
 
-                <input class="search__input" type="text" placeholder="Cerca per nome" @keyup.enter="">
-
+                <input class="search__input" type="text" placeholder="Cerca">
             </div>
-
-
-
-
 
         </div>
         <div>
-
             <button><i class="fa-regular fa-user"><span>Account</span></i></button>
             <button><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
             <button @click="toggleCart"><i class="fa-solid fa-cart-shopping"><span>Carrello</span></i></button>
@@ -94,7 +88,7 @@ export default {
     }
 
     span {
-
+        display: none;
         line-height: 25px;
         font-size: 8px;
         padding: 0.5rem;
@@ -206,16 +200,10 @@ img {
 
 .offcanvas-body {
     background-color: #000000;
-    color: #575756;
 }
 
 .offcanvas-header {
     background-color: #000000;
-    color: #575756;
-}
-
-.btn-close {
-    color: white;
 }
 
 .round-img {

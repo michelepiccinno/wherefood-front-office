@@ -32,9 +32,10 @@ export default {
 
         </div>
         <div>
-            <button><i class="fa-regular fa-user"><span>Account</span></i></button>
-            <button><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
-            <button @click="toggleCart"><i class="fa-solid fa-cart-shopping"><span>Carrello</span></i></button>
+            <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
+            <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
+            <button class="header-btn" @click="toggleCart"><i
+                    class="fa-solid fa-cart-shopping"><span>Carrello</span></i></button>
 
             <!-- Offcanvas del carrello -->
             <div class="offcanvas offcanvas-end" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
@@ -66,14 +67,7 @@ export default {
     padding: 0 5%;
     background-color: #00000000;
 
-    button {
-        border-style: none;
-        border: none;
-        background: none;
 
-
-
-    }
 
     i {
         color: #575756;
@@ -87,15 +81,7 @@ export default {
         color: #53fc5b;
     }
 
-    span {
-        display: none;
-        line-height: 25px;
-        font-size: 8px;
-        padding: 0.5rem;
-        color: white;
 
-
-    }
 
 
 }
@@ -211,5 +197,16 @@ img {
     width: 50px;
     border-radius: 50%;
     background-color: #53fc5b;
+}
+
+.header-btn {
+    border-radius: 10px;
+    border: 1px solid #646464;
+    background: none;
+    margin: 0 0.25rem;
+
+    span {
+        padding-left: 0.5rem
+    }
 }
 </style>

@@ -6,12 +6,29 @@ import { store } from "../store.js"
 export default {
     name: "AppCat",
     data() {
+
+
+
         return {
 
             store
         }
     }, methods: {
 
+
+    }, mounted() {
+        this.$nextTick(() => {
+            const scrollContainer = document.querySelector(".wrapper");
+
+            if (scrollContainer) {
+                scrollContainer.addEventListener("wheel", (evt) => {
+                    evt.preventDefault();
+                    scrollContainer.scrollLeft += evt.deltaY * 3;
+                }, { passive: false });
+            } else {
+                console.error("Element with class 'wrapper' not found");
+            }
+        });
     }
 }
 </script>
@@ -24,14 +41,17 @@ export default {
                 <h3>Categorie</h3>
             </div>
 
-            <div class="wrapper d-flex justify-space-between align-items-center">
+            <div class="wrapper  justify-space-between align-items-center">
                 <div v-for="(category, index) in this.store.categoriesArray" :key="index" href=""
                     class="cat-wrap d-flex flex-column align-items-center">
                     <div class="img-wrap">
 
                     </div>
                     <div class="title-wrap">
-                        <p>{{ category.name }}</p>
+                        <div class="cat-name">
+                            <p>{{ category.name }}</p>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,13 +100,45 @@ export default {
 .wrapper {
     background-color: rgba(49, 39, 4, 0.829);
     margin: 0 auto;
-    height: 20vh;
+    min-height: 25vh;
+    display: flex;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    padding: 0 1rem;
+    position: relative;
+
+
 }
 
 .img-wrap {
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    background-color: aqua;
+    background-color: rgb(0, 0, 0);
+
+}
+
+.cat-wrap {
+    margin: 0 1rem;
+}
+
+.title-wrap {
+    background-color: rgb(255, 54, 54);
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    font-size: 14px;
+
+    vertical-align: middle;
+    text-align: center;
+
+    bottom: 30px;
+
+
+    .cat-name {
+        margin: 0 13px;
+        margin-bottom: 0 !important;
+    }
 }
 </style>

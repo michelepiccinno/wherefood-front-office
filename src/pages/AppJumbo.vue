@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import '../styles/general.scss';
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Autoplay, Scrollbar, A11y } from 'swiper/modules';
 
 
 
@@ -26,7 +26,7 @@ export default {
     },
     setup() {
         return {
-            modules: [Navigation],
+            modules: [Autoplay, Navigation],
         };
     },
 };
@@ -41,7 +41,12 @@ export default {
             </p>
         </div>
 
-        <swiper :navigation="true" :modules="modules" class="mySwiper">
+        <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
+            delay: 2500,
+            disableOnInteraction: false,
+        }" :pagination="{
+    clickable: true,
+}" :navigation="true" :modules="modules" class="mySwiper">
 
             <swiper-slide class="opacity burger-bg"></swiper-slide>
             <swiper-slide class="opacity pizza-bg"></swiper-slide>
@@ -85,8 +90,6 @@ section {
     }
 }
 
-
-
 .opacity {
     opacity: 0.3;
 }
@@ -96,33 +99,29 @@ section {
     height: calc(100vh - 80px);
     position: relative;
 
+}
+
+.burger-bg {
+
+    background-image: url(cee452e7a99c5571c6ce793f80090c29.jpg);
+    background-size: cover;
+    background-position: bottom;
+
+}
+
+.pizza-bg {
+    background-image: url(AdobeStock_636302609-1.webp);
 
 
+    background-size: cover;
+    background-position: bottom;
 
-    .burger-bg {
+}
 
-        background-image: url(cee452e7a99c5571c6ce793f80090c29.jpg);
-        background-size: cover;
-        background-position: bottom;
-
-    }
-
-    .pizza-bg {
-        background-image: url(AdobeStock_636302609-1.webp);
-
-
-        background-size: cover;
-        background-position: bottom;
-
-    }
-
-    .jap-bg {
-        background-image: url(wallpaper-japanese-food-photography-sushi.jpg);
-        background-size: cover;
-        background-position: center;
-
-    }
-
+.jap-bg {
+    background-image: url(wallpaper-japanese-food-photography-sushi.jpg);
+    background-size: cover;
+    background-position: center;
 
 }
 </style>

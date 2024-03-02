@@ -5,7 +5,6 @@ export const store = reactive({
     apiRestaurants: "restaurants/",
     apiCategories: "categories/",
     restaurantsArray: [],
-
     categoriesArray: [],
     cartItems: [],
 

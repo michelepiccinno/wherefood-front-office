@@ -25,12 +25,13 @@ export default {
             </div>
 
             <div class="wrapper d-flex justify-space-between align-items-center">
-                <div class="cat-wrap d-flex flex-column align-items-center">
+                <div v-for="(category, index) in this.store.categoriesArray" :key="index" href=""
+                    class="cat-wrap d-flex flex-column align-items-center">
                     <div class="img-wrap">
 
                     </div>
                     <div class="title-wrap">
-                        <p>categoria</p>
+                        <p>{{ category.name }}</p>
                     </div>
                 </div>
             </div>

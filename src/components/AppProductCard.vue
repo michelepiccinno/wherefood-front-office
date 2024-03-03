@@ -23,13 +23,16 @@ export default {
                 .catch(error => {
                     console.error(error);
                 });
-        }
+        },
+        addToCart(product) {
+            this.store.cartItems.push({ ...product, quantity: 1 });
+        },
     }
 }
 </script>
 
 <template>
-    <div class="wrapper d-flex align-items-center flex-wrap">
+    <div class="d-flex align-items-center flex-wrap">
         <div v-for=" product in this.store.productsArray" :key="product.id">
             <div class="__area text-center">
                 <a href="#" class="__card">
@@ -43,7 +46,12 @@ export default {
                         <p>
                             {{ product.description }}
                         </p>
-                        <div class="__detail">
+                        <p>
+                            Prezzo: {{ product.price }}€
+                        </p>
+                        <div class="__detail d-flex flex-column">
+                            <button type="button" class="btn btn-primary" @click="addToCart(product)">Aggiungi al
+                                carrello</button>
                         </div>
                     </div>
                 </a>

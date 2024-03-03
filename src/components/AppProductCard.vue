@@ -1,50 +1,53 @@
 <script>
 import { store } from "../store.js" //state management
+import axios from 'axios'; //importo Axios
 
 export default {
     name: "AppRestaurantCard",
-    props: {
-        restaurant: {
-            type: Object,
-            required: true
-        }
-    },
+    props: ['restaurantId'],
     data() {
         return {
-            store
+            store,
         }
     },
+    mounted() {
+        this.findProducts()
+    },
     methods: {
-        showMenu(restaurantId) {
-            this.$router.push({ name: 'products', params: { restaurantId } })
+        findProducts() {
+            axios.get(`http://127.0.0.1:8000/api/restaurants/${this.restaurantId}/products`)
+                .then(risultato => {
+                    this.store.productsArray = risultato.data.results;
+                    console.log(risultato);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     }
 }
 </script>
 
 <template>
-    <div>
-        <div class="__area text-center">
-            <a href="#" class="__card">
-                <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
-                <img :src=restaurant.image class="img-fluid __img" />
-                <div class="__card_detail text-left">
-                    <h4>{{ restaurant.name }}</h4>
-                    <p>
-                        {{ restaurant.address }}
-                    </p>
-                    <span>
-                        P.IVA: {{ restaurant.PIVA }}
-                    </span>
-                    <div class="__type">
-                        <span v-for="(category, index) in restaurant.categories" :key="index" href="">{{
-                            category.name }}</span>
+    <div class="wrapper d-flex align-items-center flex-wrap">
+        <div v-for=" product in this.store.productsArray" :key="product.id">
+            <div class="__area text-center">
+                <a href="#" class="__card">
+                    <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
+                    <img :src=product.image class="img-fluid __img" />
+                    <div class="__card_detail text-left">
+                        <h4>{{ product.name }}</h4>
+                        <p>
+                            {{ product.ingredients }}
+                        </p>
+                        <p>
+                            {{ product.description }}
+                        </p>
+                        <div class="__detail">
+                        </div>
                     </div>
-                    <div class="__detail">
-                        <button class="btn btn-primary" @click="showMenu(restaurant.id)">Menu</button>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 </template>

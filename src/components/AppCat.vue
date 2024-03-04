@@ -41,7 +41,7 @@ export default {
                 <h3>Categories</h3>
             </div>
 
-            <div class="wrapper  justify-space-between align-items-center">
+            <div class="wrapper  justify-space-between align-items-center horizontal-scrollbar">
                 <div v-for="(category, index) in this.store.categoriesArray" :key="index" href=""
                     class="cat-wrap d-flex flex-column align-items-center">
                     <div class="img-wrap">
@@ -105,9 +105,10 @@ export default {
     min-height: 25vh;
     display: flex;
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    // overflow-x: hidden;
     padding: 0 1rem;
     position: relative;
+
 
 
 }
@@ -125,7 +126,7 @@ export default {
 }
 
 .title-wrap {
-    background-color: rgb(59, 59, 59);
+    background-color: #911710;
     font-family: "Playfair Display", serif;
     font-style: italic;
     color: rgb(255, 255, 255);
@@ -142,5 +143,33 @@ export default {
         margin: 0 13px;
         margin-bottom: 0 !important;
     }
+}
+
+.horizontal-scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 14px;
+    background-color: #1C0113;
+    border: 2px solid #1C0113;
+
+
+
+}
+
+.horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
+    background: #26FF56;
+    border-top: 0.5px solid #1C0113;
+    border-bottom: 0.5px solid #1C0113;
+    border-radius: 5px;
+    width: 100px;
+
+
+}
+
+.horizontal-scrollbar {
+
+
+    overflow: auto;
+    height: 120px;
+
 }
 </style>

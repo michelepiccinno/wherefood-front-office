@@ -1,6 +1,7 @@
 <script>
 import { store } from "../store.js"
 import AppRestaurantCard from '../components/AppRestaurantCard.vue';
+import AppCat from "../components/AppCat.vue";
 
 export default {
     name: "AdvancedSearch",
@@ -15,8 +16,11 @@ export default {
             store
         };
     },
+    mounted() {
+    },
     components: {
-        AppRestaurantCard
+        AppRestaurantCard,
+        AppCat
     },
     setup() {
         return {
@@ -26,6 +30,9 @@ export default {
 }
 </script>
 <template>
+    <section>
+        <AppCat />
+    </section>
     <div class="wrapper d-flex align-items-center flex-wrap">
         <AppRestaurantCard v-for="(restaurant, index) in this.store.restaurantsArray" :key="index" :restaurant="restaurant">
         </AppRestaurantCard>

@@ -22,16 +22,35 @@ export default {
 	mounted() {
 		this.doThings();
 
-		let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants;
+		// if (this.store.selectedCategories.length == 0) {
+		// 	//Recupera tutti i ristoranti da backend.
+		// 	let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants;
 
-		axios.get(restaurantsUrl).then(risultato => {
-			this.store.restaurantsArray = risultato.data.results;
+		// 	axios.get(restaurantsUrl).then(risultato => {
+		// 		this.store.restaurantsArray = risultato.data.results;
 
-			console.log(risultato);
-		}).catch(errore => {
-			console.error(errore);
-		});
+		// 		console.log(risultato);
+		// 	}).catch(errore => {
+		// 		console.error(errore);
+		// 	});
+		// } else {
+		//Recupera i ristoranti filtrati
 
+		this.store.selectedCategories.forEach(selectedCategory => {
+			let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + selectedCategory;
+			axios.get(restaurantsUrl).then(risultato => {
+				this.store.restaurantsArray += risultato.data.results;
+
+				console.log(risultato);
+			}).catch(errore => {
+				console.error(errore);
+			});
+		})
+
+
+		// }
+
+		//Recupera tutte le categorie da backend.
 		let categoriesUrl = this.store.apiUrl + this.store.apiCategories;
 
 		axios.get(categoriesUrl).then(risultato => {
@@ -42,6 +61,7 @@ export default {
 			console.error(errore);
 		});
 
+		//LocalStorage per salvataggio browser item nel carrello.
 		const storedCartItems = localStorage.getItem('cartItems');
 		if (storedCartItems) {
 			this.store.cartItems = JSON.parse(storedCartItems);

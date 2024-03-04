@@ -186,10 +186,21 @@ img {
 
 .offcanvas-body {
     background-color: #000000;
+    color: white;
 }
 
 .offcanvas-header {
     background-color: #000000;
+    color: white;
+
+    .offcanvas-title {
+        color: white;
+
+    }
+
+    .btn-close {
+        color: white;
+    }
 }
 
 .round-img {
@@ -204,6 +215,7 @@ img {
     border: 1px solid #646464;
     background: none;
     margin: 0 0.25rem;
+    color: white;
 
     span {
         padding-left: 0.5rem

@@ -14,9 +14,28 @@ export default {
             store
         }
     }, methods: {
+        addCategory(category) {
+            this.store.selectedCategories.push(category);
+            this.$router.push({ name: 'search' })
+            this.filteredRestaurant;
+        },
 
+        filteredRestaurant() {
+            this.store.selectedCategories.forEach(selectedCategory => {
+                let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + selectedCategory;
+                axios.get(restaurantsUrl).then(risultato => {
+                    this.store.restaurantsArray += risultato.data.results;
 
-    }, mounted() {
+                    console.log(risultato);
+                }).catch(errore => {
+                    console.error(errore);
+                });
+
+            })
+        }
+    },
+
+    mounted() {
         this.$nextTick(() => {
             const scrollContainer = document.querySelector(".wrapper");
 
@@ -42,17 +61,20 @@ export default {
             </div>
 
             <div class="wrapper  justify-space-between align-items-center">
-                <div v-for="(category, index) in this.store.categoriesArray" :key="index" href=""
+                <div v-for="(category, index) in this.store.categoriesArray" :key="index"
                     class="cat-wrap d-flex flex-column align-items-center">
-                    <div class="img-wrap">
+                    <button @click=addCategory(category.id)>
 
-                    </div>
-                    <div class="title-wrap">
-                        <div class="cat-name">
-                            <p>{{ category.name }}</p>
+                        <div class="img-wrap">
 
                         </div>
-                    </div>
+                        <div class="title-wrap">
+                            <div class="cat-name">
+                                <p>{{ category.name }}</p>
+
+                            </div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>

@@ -22,7 +22,6 @@ export default {
 	mounted() {
 		this.doThings();
 
-		//RestaurantsApi to restaurantsArray on store
 		let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants;
 
 		axios.get(restaurantsUrl).then(risultato => {
@@ -33,7 +32,6 @@ export default {
 			console.error(errore);
 		});
 
-		//RestaurantsApi to restaurantsArray on store
 		let categoriesUrl = this.store.apiUrl + this.store.apiCategories;
 
 		axios.get(categoriesUrl).then(risultato => {
@@ -43,6 +41,11 @@ export default {
 		}).catch(errore => {
 			console.error(errore);
 		});
+
+		const storedCartItems = localStorage.getItem('cartItems');
+		if (storedCartItems) {
+			this.store.cartItems = JSON.parse(storedCartItems);
+		}
 	},
 	methods: {
 		doThings() {

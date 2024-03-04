@@ -16,7 +16,7 @@ export default {
         };
     },
     components: {
-        AppRestaurantCard // Assicurati di registrare il componente della carta
+        AppRestaurantCard
     },
     setup() {
         return {

@@ -36,7 +36,9 @@ export default {
 
 <template>
     <section>
+
         <div class="middle-cont">
+
             <img src="Where.png" alt="">
             <p class="playfair-display"> &ldquo;I piatti dei ristoranti che ami e la spesa, a domicilio&rdquo;
             </p>
@@ -54,6 +56,7 @@ export default {
             <swiper-slide class="opacity jap-bg"></swiper-slide>
 
         </swiper>
+
     </section>
     <section>
         <AppCat />
@@ -62,7 +65,7 @@ export default {
 
 <style scoped lang="scss">
 section {
-
+    position: relative;
 
     //background: rgb(0, 0, 0);
     //background: linear-gradient(90deg, rgba(0, 0, 0, 0.8436624649859944) 40%, rgba(255, 30, 30, 0) 82%);

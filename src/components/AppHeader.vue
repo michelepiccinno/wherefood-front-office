@@ -201,12 +201,20 @@ img {
 
 .header-btn {
     border-radius: 10px;
-    border: 1px solid #646464;
-    background: none;
+    border-style: none;
+    background: #64646421;
     margin: 0 0.25rem;
+    color: color(#575756 a(0.8));
+
 
     span {
         padding-left: 0.5rem
     }
+}
+
+.header-btn:hover {
+    background: none;
+    transition: all 0.5s ease-in-out;
+    border: 1px solid #646464;
 }
 </style>

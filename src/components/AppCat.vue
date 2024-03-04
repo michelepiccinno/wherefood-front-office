@@ -35,10 +35,13 @@ export default {
 
 <template>
     <div class="template">
+        <div class="cat-img">
+            <img src="Categorie-removebg-preview.png" alt="">
+        </div>
         <div class="bg-cat">
             <div class="up-wrapper">
 
-                <h3>Categories</h3>
+                <!-- <h3>Categories</h3> -->
             </div>
 
             <div class="wrapper  justify-space-between align-items-center horizontal-scrollbar">
@@ -62,6 +65,7 @@ export default {
 <style scoped lang="scss">
 .template {
     color: black;
+    position: relative;
 }
 
 .section-title {
@@ -75,10 +79,11 @@ export default {
     width: 100%;
 
     //background-image: url(menus.webp);
-    background-image: url(black-tile.jpg);
+    background-image: url(menus.jpg);
+    background-size: contain;
 
-    background-size: cover;
-    background-position: center;
+
+
 
 
 
@@ -95,14 +100,14 @@ export default {
 }
 
 .up-wrapper {
-    background-color: rgba(0, 0, 0, 0.500);
+    background-color: rgba(0, 0, 0, 0.429);
     margin: 0;
 }
 
 .wrapper {
-    background-color: rgba(0, 0, 0, 0.500);
+    background-color: rgba(0, 0, 0, 0);
     margin: 0 auto;
-    min-height: 25vh;
+    min-height: 40vh;
     display: flex;
     scroll-behavior: smooth;
     // overflow-x: hidden;
@@ -114,8 +119,8 @@ export default {
 }
 
 .img-wrap {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
     background-color: rgb(0, 0, 0);
 
@@ -145,6 +150,10 @@ export default {
     }
 }
 
+
+
+
+
 .horizontal-scrollbar::-webkit-scrollbar {
     width: 5px;
     height: 14px;
@@ -156,7 +165,7 @@ export default {
 }
 
 .horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
-    background: #26FF56;
+    background: #26ff557e;
     border-top: 0.5px solid #1C0113;
     border-bottom: 0.5px solid #1C0113;
     border-radius: 5px;
@@ -171,5 +180,14 @@ export default {
     overflow: auto;
     height: 120px;
 
+}
+
+.cat-img {
+    position: absolute;
+    right: 100px;
+
+    top: -300px;
+    opacity: (1) !important;
+    z-index: -2;
 }
 </style>

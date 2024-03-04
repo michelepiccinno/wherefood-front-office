@@ -11,6 +11,9 @@ export default {
         }
     },
     methods: {
+        redirectToLogin() {
+            window.location.href = 'http://127.0.0.1:8000/login';
+        },
         toggleCart() {
             this.isCartOpen = !this.isCartOpen;
         },
@@ -36,10 +39,10 @@ export default {
 
         removeFromCart(index) {
             this.store.cartItems.splice(index, 1);
-            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems)); 
+            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
         },
     },
-    
+
 }
 </script>
 
@@ -62,7 +65,8 @@ export default {
         </div>
         <div>
             <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
-            <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
+            <button class="header-btn" @click=redirectToLogin()><i class="fa-solid fa-right-to-bracket"><span>Log
+                        in</span></i></button>
             <button class="header-btn" @click="toggleCart"><i
                     class="fa-solid fa-cart-shopping"><span>Carrello</span></i></button>
 

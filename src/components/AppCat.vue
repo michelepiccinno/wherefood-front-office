@@ -38,7 +38,7 @@ export default {
         <div class="bg-cat">
             <div class="up-wrapper">
 
-                <h3>Categorie</h3>
+                <h3>Categories</h3>
             </div>
 
             <div class="wrapper  justify-space-between align-items-center">

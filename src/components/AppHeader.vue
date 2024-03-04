@@ -1,21 +1,50 @@
 <script>
-import { store } from "../store.js" //state management
-import register from "../debug" //per debuggare il componente da console
+import { store } from "../store.js"; // Importa lo store
 
 export default {
     name: "AppHeader",
     data() {
         return {
             isCartOpen: false,
-            store
+            store,
+            uniqueOrders: [],
         }
-    }, methods: {
+    },
+    methods: {
         toggleCart() {
             this.isCartOpen = !this.isCartOpen;
-        }
-    }
+        },
+        addToCart(product) {
+            const existingProduct = this.store.cartItems.find(item => (
+                item.id === product.id &&
+                item.name === product.name &&
+                item.price === product.price
+            ));
+
+            if (existingProduct) {
+                existingProduct.quantity++;
+                this.$toasted.show(`Quantità di ${product.name} nel carrello aumentata`, { duration: 3000 });
+            } else {
+                const newProduct = { ...product, quantity: 1 };
+                this.store.cartItems.push(newProduct);
+                this.uniqueOrders.push(newProduct);
+                this.$toasted.show(`${product.name} aggiunto al carrello`, { duration: 3000 });
+            }
+
+            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+        },
+
+        removeFromCart(index) {
+            this.store.cartItems.splice(index, 1);
+            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems)); 
+        },
+    },
+    
 }
 </script>
+
+
+
 
 <template>
     <div class="nav d-flex justify-content-between align-items-center">
@@ -46,7 +75,10 @@ export default {
                 </div>
                 <div class="offcanvas-body">
                     <ul v-if="store.cartItems.length > 0">
-                        <li v-for="(item, index) in store.cartItems" :key="index">{{ item.name }} - {{ item.price }}</li>
+                        <li v-for="(item, index) in store.cartItems" :key="index">
+                            {{ item.name }} - {{ item.price }} {{ item.quantity }}
+                            <button @click="removeFromCart(index)">Rimuovi</button>
+                        </li>
                     </ul>
                     <p v-else>Il carrello è vuoto</p>
                 </div>

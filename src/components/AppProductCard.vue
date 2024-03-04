@@ -33,38 +33,50 @@ export default {
 </script>
 
 <template>
-    <div class="d-flex align-items-center flex-wrap">
-        <div v-for=" product in this.store.productsArray" :key="product.id">
-            <div class="__area text-center">
-                <a href="#" class="__card">
-                    <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
-                    <img :src=product.image class="img-fluid __img" />
-                    <div class="__card_detail text-left">
-                        <h4>{{ product.name }}</h4>
-                        <p>
-                            {{ product.ingredients }}
-                        </p>
-                        <p>
-                            {{ product.description }}
-                        </p>
-                        <p>
-                            Prezzo: {{ product.price }}€
-                        </p>
-                        <div class="__detail d-flex flex-column">
-                            <button type="button" class="btn btn-primary" @click="addToCart(product)">Aggiungi al
-                                carrello</button>
+    <section class="cont">
+        <div class="d-flex align-items-center flex-wrap wrap">
+            <div v-for=" product in this.store.productsArray" :key="product.id">
+                <div class="__area text-center">
+                    <a href="#" class="__card">
+                        <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
+                        <img :src=product.image class="img-fluid __img" />
+                        <div class="__card_detail text-left">
+                            <h4>{{ product.name }}</h4>
+                            <p>
+                                {{ product.ingredients }}
+                            </p>
+                            <p>
+                                {{ product.description }}
+                            </p>
+                            <p>
+                                Prezzo: {{ product.price }}€
+                            </p>
+                            <div class="__detail d-flex flex-column">
+                                <button type="button" class="btn btn-primary" @click="addToCart(product)">Aggiungi al
+                                    carrello</button>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <style scoped lang="scss">
-.wrapper {
+.cont {
+    padding: 1rem;
+    background-image: url(illustration-vector.jpg);
+    background-size: contain;
+    height: calc(100vh - 80px);
+
+}
+
+.wrap {
     width: 80%;
     margin: auto;
+    background-color: rgba(0, 0, 0, 0.321);
+    border-radius: 10px;
 }
 
 .__area {

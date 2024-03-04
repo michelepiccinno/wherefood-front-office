@@ -79,6 +79,7 @@ export default {
 
     i:hover {
         color: #53fc5b;
+        transition: all 0.3s ease-in-out;
     }
 
 
@@ -179,7 +180,7 @@ img {
     font-size: 18px;
 
     .search-btn:hover {
-        color: #53fc5b !important;
+
         border-bottom: 1px solid #53fc5b !important;
     }
 }
@@ -216,5 +217,9 @@ img {
     background: none;
     transition: all 0.5s ease-in-out;
     border: 1px solid #646464;
+
+    span {
+        color: #646464;
+    }
 }
 </style>

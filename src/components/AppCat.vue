@@ -35,9 +35,7 @@ export default {
 
 <template>
     <div class="template">
-        <div class="cat-img">
-            <img src="Categorie-removebg-preview.png" alt="">
-        </div>
+
         <div class="bg-cat">
             <div class="up-wrapper">
 
@@ -137,7 +135,7 @@ export default {
     color: rgb(255, 255, 255);
     position: absolute;
     font-size: 14px;
-
+    font-weight: 800;
     vertical-align: middle;
     text-align: center;
 
@@ -147,6 +145,8 @@ export default {
     .cat-name {
         margin: 0 13px;
         margin-bottom: 0 !important;
+
+        border-radius: 10px !important;
     }
 }
 
@@ -157,6 +157,7 @@ export default {
 .horizontal-scrollbar::-webkit-scrollbar {
     width: 5px;
     height: 14px;
+
     background-color: #1C0113;
     border: 2px solid #1C0113;
 
@@ -180,14 +181,5 @@ export default {
     overflow: auto;
     height: 120px;
 
-}
-
-.cat-img {
-    position: absolute;
-    right: 100px;
-
-    top: -300px;
-    opacity: (1) !important;
-    z-index: -2;
 }
 </style>

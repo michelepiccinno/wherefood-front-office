@@ -48,18 +48,20 @@ export default {
 section {
     background-image: url(search-bg.jpg);
     background-size: cover;
-    padding: 0 5rem 3rem;
+    padding: 1rem 10rem 1rem 5rem;
+    width: 100%;
+
 
 }
 
 .wrapper {
-    height: 100%;
+
     width: 60%;
-    border-radius: 10px;
-    overflow-y: auto;
+    border-radius: 10px !important;
+
     margin: auto;
     background-color: rgba(0, 0, 0, 0.800);
-    overflow-y: auto;
+
 }
 
 

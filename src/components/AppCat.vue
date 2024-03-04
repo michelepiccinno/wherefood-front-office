@@ -5,33 +5,23 @@ import { store } from "../store.js"
 
 export default {
     name: "AppCat",
+    props: {
+        filterRestaurant: {
+            type: Function,
+            required: true
+        },
+    },
     data() {
-
-
-
         return {
 
             store
         }
     }, methods: {
         addCategory(category) {
-            this.store.selectedCategories.push(category);
-            this.$router.push({ name: 'search' })
-            this.filteredRestaurant;
-        },
-
-        filteredRestaurant() {
-            this.store.selectedCategories.forEach(selectedCategory => {
-                let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + selectedCategory;
-                axios.get(restaurantsUrl).then(risultato => {
-                    this.store.restaurantsArray += risultato.data.results;
-
-                    console.log(risultato);
-                }).catch(errore => {
-                    console.error(errore);
-                });
-
-            })
+            this.store.selectedCategories = category;
+            this.$router.push({ name: 'search' });
+            console.log("ciao")
+            this.filterRestaurant();
         }
     },
 

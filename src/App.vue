@@ -20,7 +20,6 @@ export default {
 		}
 	},
 	mounted() {
-		this.doThings();
 
 		//Recupera tutti i ristoranti da backend.
 		let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants;
@@ -44,6 +43,18 @@ export default {
 			console.error(errore);
 		});
 
+
+		//Recupera i ristoranti filtrati per categoria
+		let filteredRestaurantUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + this.store.selectedCategories;
+
+		axios.get(filteredRestaurantUrl).then(risultato => {
+			this.store.restaurantsArray = risultato.data.results;
+
+			console.log(risultato);
+		}).catch(errore => {
+			console.error(errore);
+		});
+
 		//LocalStorage per salvataggio browser item nel carrello.
 		const storedCartItems = localStorage.getItem('cartItems');
 		if (storedCartItems) {
@@ -52,7 +63,7 @@ export default {
 	},
 	methods: {
 		doThings() {
-			console.log("App.vue does things");
+			console.log("App.vue caricato");
 		},
 
 	}
@@ -73,7 +84,6 @@ export default {
 </template>
 
 <style lang="scss">
-// importo il foglio di stile generale dell'applicazione, non-scoped
 @use './styles/general.scss';
 </style>
 

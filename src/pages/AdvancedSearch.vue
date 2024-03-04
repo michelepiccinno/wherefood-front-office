@@ -24,17 +24,27 @@ export default {
     methods: {
         filterRestaurant() {
             console.log("entrato");
-            //Recupera i ristoranti filtrati per categoria
-            let filteredRestaurantUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + this.store.selectedCategories;
+            const restaurantsArray = [];
 
-            axios.get(filteredRestaurantUrl).then(risultato => {
-                this.store.restaurantsArray = risultato.data.results;
+            for (let i = 0; i < this.store.selectedCategories.length; i++) {
+                const element = this.store.selectedCategories[i];
+                const filteredRestaurantUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + element;
 
-                console.log(risultato);
-            }).catch(errore => {
-                console.error(errore);
-            });
-        }
+                axios.get(filteredRestaurantUrl)
+                    .then(response => {
+
+                        restaurantsArray.push(...response.data.results);
+
+                        if (i === this.store.selectedCategories.length - 1) {
+                            this.store.restaurantsArray = restaurantsArray;
+                            console.log("Risultati combinati:", this.store.restaurantsArray);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Errore durante la richiesta per l'ID", element, ":", error);
+                    });
+            }
+}
     }
 }
 </script>

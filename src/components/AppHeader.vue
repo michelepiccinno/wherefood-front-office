@@ -65,7 +65,8 @@ export default {
     height: 80px;
     width: 100%;
     padding: 0 5%;
-    background-color: #00000000;
+    background-color: #000000;
+
 
 
 

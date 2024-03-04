@@ -158,17 +158,17 @@ export default {
     width: 5px;
     height: 14px;
 
-    background-color: #1C0113;
-    border: 2px solid #1C0113;
+    background-color: #000000;
+    border: 2px solid #000000;
 
 
 
 }
 
 .horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
-    background: #26ff557e;
-    border-top: 0.5px solid #1C0113;
-    border-bottom: 0.5px solid #1C0113;
+    background: #26FF56;
+    border-top: 0.5px solid #000000;
+    border-bottom: 0.5px solid #000000;
     border-radius: 5px;
     width: 100px;
 

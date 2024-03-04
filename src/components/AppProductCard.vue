@@ -35,11 +35,11 @@ export default {
 <template>
     <section class="cont">
         <div class="d-flex align-items-center flex-wrap wrap">
-            <div v-for=" product in this.store.productsArray" :key="product.id">
+            <div v-for=" product in  this.store.productsArray " :key="product.id" class="card-measure">
                 <div class="__area text-center">
                     <a href="#" class="__card">
                         <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
-                        <img :src=product.image class="img-fluid __img" />
+                        <img :src="product.image" class="img-fluid __img" />
                         <div class="__card_detail text-left">
                             <h4>{{ product.name }}</h4>
                             <p>
@@ -69,6 +69,11 @@ export default {
     background-image: url(illustration-vector.jpg);
     background-size: contain;
     height: calc(100vh - 80px);
+
+}
+
+.card-measure {
+    width: calc(100% / 4);
 
 }
 

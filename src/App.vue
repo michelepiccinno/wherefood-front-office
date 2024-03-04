@@ -21,7 +21,7 @@ export default {
 	},
 	mounted() {
 
-		//Recupera tutti i ristoranti da backend.
+/* 		//Recupera tutti i ristoranti da backend.
 		let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants;
 
 		axios.get(restaurantsUrl).then(risultato => {
@@ -30,7 +30,7 @@ export default {
 			console.log(risultato);
 		}).catch(errore => {
 			console.error(errore);
-		});
+		}); */
 
 		//Recupera tutte le categorie da backend.
 		let categoriesUrl = this.store.apiUrl + this.store.apiCategories;

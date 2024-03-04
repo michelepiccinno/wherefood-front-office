@@ -23,28 +23,28 @@ export default {
     },
     methods: {
         filterRestaurant() {
-            console.log("entrato");
-            const restaurantsArray = [];
+    console.log("entrato");
+    const restaurantsArray = [];
 
-            for (let i = 0; i < this.store.selectedCategories.length; i++) {
-                const element = this.store.selectedCategories[i];
-                const filteredRestaurantUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + element;
-
-                axios.get(filteredRestaurantUrl)
-                    .then(response => {
-
-                        restaurantsArray.push(...response.data.results);
-
-                        if (i === this.store.selectedCategories.length - 1) {
-                            this.store.restaurantsArray = restaurantsArray;
-                            console.log("Risultati combinati:", this.store.restaurantsArray);
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Errore durante la richiesta per l'ID", element, ":", error);
-                    });
-            }
-}
+    for (let i = 0; i < this.store.selectedCategories.length; i++) {
+        const element = this.store.selectedCategories[i];
+        const filteredRestaurantUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + element;
+        axios.get(filteredRestaurantUrl)
+            .then(response => {
+                const filteredResults = response.data.results.filter(result => {
+                    return !restaurantsArray.some(restaurant => restaurant.id === result.id);
+                });
+                restaurantsArray.push(...filteredResults);
+                if (i === this.store.selectedCategories.length - 1) {
+                    this.store.restaurantsArray = restaurantsArray;
+                    console.log("Risultati combinati:", this.store.restaurantsArray);
+                }
+            })
+            .catch(error => {
+                console.error("Errore durante la richiesta per l'ID", element, ":", error);
+            });
+        }
+    }
     }
 }
 </script>

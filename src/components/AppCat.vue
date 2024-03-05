@@ -19,7 +19,6 @@ export default {
     }, methods: {
         addCategory(category) {
             this.store.selectedCategories.push(category);
-            this.$router.push({ name: 'search' });
             console.log("ciao")
             this.filterRestaurant();
         }

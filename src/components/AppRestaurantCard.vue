@@ -15,6 +15,9 @@ export default {
         }
     },
     methods: {
+        getFullImagePath(imagePath) {
+            return 'http://127.0.0.1:8000/storage/' + imagePath;
+        },
         showMenu(restaurantId) {
             this.$router.push({ name: 'products', params: { restaurantId } })
         },
@@ -33,29 +36,27 @@ export default {
 </script>
 
 <template>
-    <div>
-        <div class="__area text-center">
-            <a href="#" class="__card">
-                <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
-                <img :src=restaurant.image class="img-fluid __img" />
-                <div class="__card_detail text-left">
-                    <h4>{{ restaurant.name }}</h4>
-                    <p>
-                        {{ restaurant.address }}
-                    </p>
-                    <span>
-                        P.IVA: {{ restaurant.PIVA }}
-                    </span>
-                    <div class="__type">
-                        <span v-for="(category, index) in restaurant.categories" :key="index" href="">{{
-                            category.name }}</span>
-                    </div>
-                    <div class="__detail">
-                        <button class="btn btn-primary" @click="showMenu(restaurant.id)">Menu</button>
-                    </div>
+    <div class="__area text-center">
+        <a href="#" class="__card">
+            <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
+            <img :src="getFullImagePath(restaurant.image)" class="img-fluid __img" />
+            <div class="__card_detail text-left">
+                <h4>{{ restaurant.name }}</h4>
+                <p>
+                    {{ restaurant.address }}
+                </p>
+                <span>
+                    P.IVA: {{ restaurant.PIVA }}
+                </span>
+                <div class="__type">
+                    <span v-for="(category, index) in restaurant.categories" :key="index" href="">{{
+                        category.name }}</span>
                 </div>
-            </a>
-        </div>
+                <div class="__detail">
+                    <button class="btn btn-primary" @click="showMenu(restaurant.id)">Menu</button>
+                </div>
+            </div>
+        </a>
     </div>
 </template>
 

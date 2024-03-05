@@ -6,23 +6,61 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import '../styles/general.scss';
+
 // import Swiper core and required modules
 import { Navigation, Autoplay, Scrollbar, A11y } from 'swiper/modules';
+import AppRestaurantCard from "../components/AppRestaurantCard.vue";
 
 
 
 export default {
-    name: "AppJumbo",
+    name: "Homepage",
+    props: {
+        restaurant: {
+            type: Object,
+            required: false
+        }
+    },
     components: {
         Swiper,
         SwiperSlide,
-        AppCat
+        AppCat,
+        AppRestaurantCard
     },
     data() {
         return {
             store,
 
 
+        }
+    },
+    methods: {
+        filterRestaurants() {
+            console.log("Filtraggio dei ristoranti alla selezione di una categoria");
+
+            const filteredRestaurants = [];
+
+            for (const restaurant of this.store.restaurantsArray) {
+                let shouldInclude = false;
+
+                // Cicla attraverso gli oggetti categories del ristorante corrente
+                for (const category of restaurant.categories) {
+                    // Controlla se il nome della categoria corrente è tra quelle selezionate
+                    if (this.store.selectedCategories.includes(category.id)) {
+                        shouldInclude = true;
+                        break;
+                    }
+                }
+            }
+
+            if (shouldInclude) {
+                filteredRestaurants.push(restaurant);
+            }
+
+            // Aggiorna lo stato dell'array dei ristoranti nell'oggetto store
+            this.store.filteredRestaurants = filteredRestaurants;
+
+            console.log("Ristoranti filtrati:", this.store.filteredRestaurants);
         }
     },
     setup() {
@@ -59,7 +97,14 @@ export default {
 
     </section>
     <section>
-        <AppCat />
+        <AppCat :filterRestaurant="filterRestaurants" />
+    </section>
+    <section>
+        <h1 class="text-center">Ristoranti</h1>
+        <div class="wrapper d-flex align-items-center justify-content-center flex-wrap">
+            <AppRestaurantCard v-for="(restaurant, index) in this.store.restaurantsArray" :restaurant="restaurant">
+            </AppRestaurantCard>
+        </div>
     </section>
 </template>
 

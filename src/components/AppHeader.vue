@@ -2,118 +2,109 @@
 import { store } from "../store.js";
 
 export default {
-    name: "AppHeader",
-    data() {
-        return {
-            isCartOpen: false,
-            store,
-            uniqueOrders: [],
-        }
+  name: "AppHeader",
+  data() {
+    return {
+      isCartOpen: false,
+      store
+    }
+  },
+  methods: {
+    toggleCart() {
+      this.isCartOpen = !this.isCartOpen;
     },
-    methods: {
-        toggleCart() {
-            this.isCartOpen = !this.isCartOpen;
-        },
-        addToCart(product) {
-            const existingProduct = this.store.cartItems.find(item => (
-                item.id === product.id &&
-                item.name === product.name &&
-                item.price === product.price
-            ));
+    addToCart(product) {
+      if (this.isInCart(product)) {
+        this.updateCart(product, product.quantity);
+      } else {
+        this.store.cartItems.push(product);
+      }
 
-  if (existingProduct) {
-    // Se il prodotto esiste già nel carrello, aggiungi la quantità
-    existingProduct.quantity += product.quantity;
-  } else {
-    // Se il prodotto non esiste nel carrello, aggiungilo come nuovo articolo
-    this.store.cartItems.push(product);
+      localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+    },
+    removeFromCart(index) {
+      if (this.store.cartItems[index].quantity <= 1) {
+        this.store.cartItems.splice(index, 1);
+      } else {
+        this.store.cartItems[index].quantity--;
+      }
+      
+      localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems)); 
+    },
+    updateCart(product, quantity) {
+      const index = this.store.cartItems.findIndex(item => item.id === product.id);
+      if (index !== -1) {
+        this.store.cartItems[index].quantity += quantity;
+      }
+    },
+    isInCart(product) {
+      return this.store.cartItems.some(item => item.id === product.id);
+    }
+  },
+  computed: {
+    totalCartItems() {
+      return this.store.cartItems.reduce((total, item) => total + item.quantity, 0);
+    }
   }
-
-  localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
-},
-
-
-        removeFromCart(index) {
-            this.store.cartItems.splice(index, 1);
-            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems)); 
-        },
-    },
-    
 }
 </script>
 
 
-
-
-
-
-
-
 <template>
-    <div class="nav d-flex justify-content-between align-items-center">
-        <div>
-            <img src="WHEREFOOD.png" alt="">
-        </div>
-        <div>
-
-            <div class="search__container">
-
-
-                <input class="search__input" type="text" placeholder="Cerca">
-            </div>
-
-        </div>
-        <div>
-            <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
-            <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
-            <button class="header-btn" @click="toggleCart"><i
-                    class="fa-solid fa-cart-shopping"><span>Carrello</span></i></button>
-
-            <!-- Offcanvas del carrello -->
-            <div class="offcanvas offcanvas-end" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title">Il tuo carrello</h5>
-                    <button @click="toggleCart" type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                        aria-label="Close">X</button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul v-if="store.cartItems.length > 0">
-                        <li v-for="(item, index) in store.cartItems" :key="index">
-                            {{ item.name }} - {{ item.price }} {{ item.quantity }}
-                            <button @click="removeFromCart(index)">Rimuovi</button>
-                        </li>
-                    </ul>
-                    <p v-else>Il carrello è vuoto</p>
-                </div>
-            </div>
-
-        </div>
-
-
-
-
+  <div class="nav d-flex justify-content-between align-items-center">
+    <div>
+      <img src="WHEREFOOD.png" alt="">
     </div>
+    <div>
+      <div class="search__container">
+        <input class="search__input" type="text" placeholder="Cerca">
+      </div>
+    </div>
+    <div>
+      <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
+      <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
+      <button class="header-btn" @click="toggleCart">
+        <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
+        <span v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
+      </button>
+      <div class="offcanvas offcanvas-end" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Il tuo carrello</h5>
+          <button @click="toggleCart" type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+        </div>
+        <div class="offcanvas-body">
+          <ul v-if="store.cartItems.length > 0">
+            <li v-for="(item, index) in store.cartItems" :key="index">
+              {{ item.name }} - {{ item.price }} {{ item.quantity }}
+              <button class="remove-button" @click="removeFromCart(index)">Rimuovi</button>
+            </li>
+          </ul>
+          <p v-else>Il carrello è vuoto</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
 
     
 .remove-button {
-  background-color: transparent; /* Sfondo trasparente */
-  color: #333; /* Colore del testo */
-  border: 2px solid #333; /* Bordo solido */
-  padding: 8px 15px; /* Spaziatura interna */
-  border-radius: 5px; /* Bordo arrotondato */
-  font-size: 14px; /* Dimensione del testo */
-  font-weight: bold; /* Testo in grassetto */
-  text-transform: uppercase; /* Testo in maiuscolo */
-  cursor: pointer; /* Mostra il cursore come un puntatore */
-  transition: all 0.3s ease; /* Transizione per tutti gli effetti */
+  background-color: transparent; 
+  color: #333; 
+  border: 2px solid #333; 
+  padding: 8px 15px; 
+  border-radius: 5px; 
+  font-size: 14px; 
+  font-weight: bold; 
+  text-transform: uppercase; 
+  cursor: pointer; 
+  transition: all 0.3s ease; 
 }
 
 .remove-button:hover {
-  background-color: #333; /* Cambia colore al passaggio del mouse */
-  color: #fff; /* Cambia colore del testo */
+  background-color: #333; 
+  color: #fff; 
 }
 .nav {
     height: 80px;

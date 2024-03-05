@@ -28,6 +28,11 @@ export default {
             this.store.cartItems.push({ ...product, quantity: 1 });
             localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
         },
+        removeFromCart(index) {
+
+               this.store.cartItems.splice(index, 1);
+               localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems)); 
+        }
     }
 }
 </script>

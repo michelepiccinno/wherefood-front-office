@@ -5,18 +5,27 @@ import { store } from "../store.js"
 
 export default {
     name: "AppCat",
+    props: {
+        filterRestaurant: {
+            type: Function,
+            required: true
+        },
+    },
     data() {
-
-
-
         return {
 
             store
         }
     }, methods: {
+        addCategory(category) {
+            this.store.selectedCategories.push(category);
+            this.$router.push({ name: 'search' });
+            console.log("ciao")
+            this.filterRestaurant();
+        }
+    },
 
-
-    }, mounted() {
+    mounted() {
         this.$nextTick(() => {
             const scrollContainer = document.querySelector(".wrapper");
 
@@ -45,15 +54,18 @@ export default {
             <div class="wrapper  justify-space-between align-items-center horizontal-scrollbar">
                 <div v-for="(category, index) in this.store.categoriesArray" :key="index" href=""
                     class="cat-wrap d-flex flex-column align-items-center">
-                    <div class="img-wrap">
+                    <button @click=addCategory(category.id)>
 
-                    </div>
-                    <div class="title-wrap">
-                        <div class="cat-name">
-                            <p>{{ category.name }}</p>
+                        <div class="img-wrap">
 
                         </div>
-                    </div>
+                        <div class="title-wrap">
+                            <div class="cat-name">
+                                <p>{{ category.name }}</p>
+
+                            </div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>

@@ -1,6 +1,8 @@
 <script>
+import axios from 'axios'; //importo Axios
 import { store } from "../store.js"
 import AppRestaurantCard from '../components/AppRestaurantCard.vue';
+import AppCat from "../components/AppCat.vue";
 
 export default {
     name: "AdvancedSearch",
@@ -16,32 +18,44 @@ export default {
         };
     },
     components: {
-        AppRestaurantCard
+        AppRestaurantCard,
+        AppCat
     },
-    setup() {
-        return {
+    methods: {
+        filterRestaurant() {
+            console.log("entrato");
+            const restaurantsArray = [];
 
-        };
-    },
+            for (let i = 0; i < this.store.selectedCategories.length; i++) {
+                const element = this.store.selectedCategories[i];
+                const filteredRestaurantUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + element;
+                axios.get(filteredRestaurantUrl)
+                    .then(response => {
+                        const filteredResults = response.data.results.filter(result => {
+                            return !restaurantsArray.some(restaurant => restaurant.id === result.id);
+                        });
+                        restaurantsArray.push(...filteredResults);
+                        if (i === this.store.selectedCategories.length - 1) {
+                            this.store.restaurantsArray = restaurantsArray;
+                            console.log("Risultati combinati:", this.store.restaurantsArray);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Errore durante la richiesta per l'ID", element, ":", error);
+                    });
+            }
+        }
+    }
 }
 </script>
 <template>
     <section>
-        <h2 class="text-center">RISULTATI PER</h2>
-        <div class="d-flex justify-content-around">
-
-            <div class="cat-wrapper">
-                CATEGORIE
-            </div>
-            <div class="wrapper d-flex align-items-center flex-wrap justify-content-between">
-
-                <AppRestaurantCard v-for="(restaurant, index) in this.store.restaurantsArray" :key="index"
-                    :restaurant="restaurant">
-                </AppRestaurantCard>
-            </div>
-        </div>
-
+        <AppCat :filterRestaurant="filterRestaurant" />
     </section>
+    <div class="wrapper d-flex align-items-center flex-wrap">
+        <AppRestaurantCard v-for="(restaurant, index) in this.store.restaurantsArray" :restaurant="restaurant">
+        </AppRestaurantCard>
+    </div>
 </template>
 
 <style scoped lang="scss">

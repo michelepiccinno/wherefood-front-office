@@ -20,8 +20,8 @@ export default {
 		}
 	},
 	mounted() {
-		this.doThings();
 
+/* 		//Recupera tutti i ristoranti da backend.
 		let restaurantsUrl = this.store.apiUrl + this.store.apiRestaurants;
 
 		axios.get(restaurantsUrl).then(risultato => {
@@ -30,8 +30,9 @@ export default {
 			console.log(risultato);
 		}).catch(errore => {
 			console.error(errore);
-		});
+		}); */
 
+		//Recupera tutte le categorie da backend.
 		let categoriesUrl = this.store.apiUrl + this.store.apiCategories;
 
 		axios.get(categoriesUrl).then(risultato => {
@@ -42,6 +43,19 @@ export default {
 			console.error(errore);
 		});
 
+
+		//Recupera i ristoranti filtrati per categoria
+		let filteredRestaurantUrl = this.store.apiUrl + this.store.apiRestaurants + this.store.apiCategories + this.store.selectedCategories;
+
+		axios.get(filteredRestaurantUrl).then(risultato => {
+			this.store.restaurantsArray = risultato.data.results;
+
+			console.log(risultato);
+		}).catch(errore => {
+			console.error(errore);
+		});
+
+		//LocalStorage per salvataggio browser item nel carrello.
 		const storedCartItems = localStorage.getItem('cartItems');
 		if (storedCartItems) {
 			this.store.cartItems = JSON.parse(storedCartItems);
@@ -49,8 +63,8 @@ export default {
 	},
 	methods: {
 		doThings() {
-			console.log("App.vue does things");
-		}
+			console.log("App.vue caricato");
+		},
 
 	}
 }
@@ -70,7 +84,6 @@ export default {
 </template>
 
 <style lang="scss">
-// importo il foglio di stile generale dell'applicazione, non-scoped
 @use './styles/general.scss';
 </style>
 

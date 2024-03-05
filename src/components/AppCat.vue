@@ -57,7 +57,7 @@ export default {
                     <button @click=addCategory(category.id)>
 
                         <div class="img-wrap">
-
+                            <img src="" alt="">
                         </div>
                         <div class="title-wrap">
                             <div class="cat-name">
@@ -117,7 +117,7 @@ export default {
 .wrapper {
     background-color: rgba(0, 0, 0, 0);
     margin: 0 auto;
-    min-height: 40vh;
+    height: 40vh !important;
     display: flex;
     scroll-behavior: smooth;
     // overflow-x: hidden;
@@ -150,7 +150,7 @@ export default {
     font-weight: 800;
     vertical-align: middle;
     text-align: center;
-
+    border-radius: 8px;
     bottom: 25px;
 
 
@@ -168,7 +168,7 @@ export default {
 
 .horizontal-scrollbar::-webkit-scrollbar {
     width: 5px;
-    height: 14px;
+    height: 5px;
 
     background-color: #000000;
     border: 2px solid #000000;
@@ -193,5 +193,167 @@ export default {
     overflow: auto;
     height: 120px;
 
+}
+
+button {
+    background: none;
+    border: none;
+}
+
+@media screen and (max-width: 768px) {
+    .img-wrap {
+        height: 80px;
+        width: 80px;
+    }
+
+    .wrapper {
+        max-height: 100px !important;
+        padding: 0 !important;
+
+    }
+
+    .horizontal-scrollbar {
+        height: 100px;
+
+    }
+
+    .title-wrap {
+        bottom: 10px;
+        border-radius: 10px;
+        font-size: 12px;
+        padding: 0.15rem;
+        margin-bottom: 0.5;
+        height: 25px;
+
+        p {
+            margin: 0 !important;
+        }
+    }
+
+    .horizontal-scrollbar::-webkit-scrollbar {
+
+        height: 3px !important;
+        padding-top: 0.5rem;
+        background-color: #000000;
+        border: 1px solid #000000;
+
+
+
+    }
+
+    .horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
+        border-top: 0.5px solid #000000;
+        border-bottom: 0.5px solid #000000;
+        border-radius: 5px;
+        width: 100px;
+        background: #26FF56;
+
+
+    }
+
+    .cat-wrap {
+        margin-bottom: 0.7rem;
+    }
+
+    .bg-cat {
+        background-size: cover;
+    }
+
+
+    @media screen and (max-width : 1200px) {
+
+        .up-wrapper {
+            background-color: rgba(0, 0, 0, 0.429);
+            margin: 0;
+        }
+
+        .wrapper {
+            background-color: rgba(0, 0, 0, 0);
+            margin: 0 auto;
+            height: 40vh;
+            display: flex;
+            scroll-behavior: smooth;
+            // overflow-x: hidden;
+            padding: 0 1rem;
+            position: relative;
+
+
+
+        }
+
+        .img-wrap {
+
+            border-radius: 50%;
+            background-color: rgb(0, 0, 0);
+
+        }
+
+        .cat-wrap {
+            margin: 0 1rem;
+        }
+
+        .title-wrap {
+            background-color: #911710;
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            color: rgb(255, 255, 255);
+            position: absolute;
+            font-size: 14px;
+            font-weight: 800;
+            vertical-align: middle;
+            text-align: center;
+            border-radius: 8px;
+            bottom: 25px;
+
+
+            .cat-name {
+                margin: 0 13px;
+                margin-bottom: 0 !important;
+
+                border-radius: 10px !important;
+            }
+        }
+
+
+
+
+
+        .horizontal-scrollbar::-webkit-scrollbar {
+            width: 5px;
+            height: 14px;
+
+            background-color: #000000;
+            border: 2px solid #000000;
+
+
+
+        }
+
+        .horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
+            border-top: 0.5px solid #000000;
+            border-bottom: 0.5px solid #000000;
+            border-radius: 5px;
+            width: 100px;
+
+            background: #26FF56;
+
+        }
+
+        .horizontal-scrollbar {
+
+
+            overflow: auto;
+
+
+        }
+
+        button {
+            background: none;
+            border: none;
+        }
+
+
+
+    }
 }
 </style>

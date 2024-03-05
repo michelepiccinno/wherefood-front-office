@@ -35,7 +35,7 @@ export default {
 </script>
 
 <template>
-    <section>
+    <section class="jumbo-section">
 
         <div class="middle-cont">
 
@@ -64,7 +64,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-section {
+.jumbo-section {
     position: relative;
 
     //background: rgb(0, 0, 0);
@@ -130,5 +130,40 @@ section {
     background-size: cover;
     background-position: center;
 
+}
+
+@media screen and (max-width: 768px) {
+    .jumbo-section {
+        width: 100%;
+        height: 150px;
+
+        background-image: url(cee452e7a99c5571c6ce793f80090c29.jpg);
+        background-size: cover;
+        background-position: bottom;
+        background-color: black;
+
+
+
+    }
+
+    .swiper {
+        display: none;
+    }
+
+    .middle-cont {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.29);
+
+        p {
+            display: none;
+        }
+
+        img {
+            text-align: center !important;
+            width: 130px !important;
+            margin-left: 45px;
+        }
+    }
 }
 </style>

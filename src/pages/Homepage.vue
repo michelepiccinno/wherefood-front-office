@@ -41,23 +41,20 @@ export default {
             const filteredRestaurants = [];
 
             for (const restaurant of this.store.restaurantsArray) {
-                let shouldInclude = false;
+                let shouldInclude = true;
 
-                // Cicla attraverso gli oggetti categories del ristorante corrente
-                for (const category of restaurant.categories) {
-                    // Controlla se il nome della categoria corrente è tra quelle selezionate
-                    if (this.store.selectedCategories.includes(category.id)) {
-                        shouldInclude = true;
+                for (const selectedCategory of this.store.selectedCategories) {
+                    if (!restaurant.categories.find(category => category.id === selectedCategory)) {
+                        shouldInclude = false;
                         break;
                     }
                 }
-            }
 
-            if (shouldInclude) {
-                filteredRestaurants.push(restaurant);
+                // Se shouldInclude è ancora true, significa che il ristorante ha tutte le categorie selezionate
+                if (shouldInclude) {
+                    filteredRestaurants.push(restaurant);
+                }
             }
-
-            // Aggiorna lo stato dell'array dei ristoranti nell'oggetto store
             this.store.filteredRestaurants = filteredRestaurants;
 
             console.log("Ristoranti filtrati:", this.store.filteredRestaurants);
@@ -102,8 +99,14 @@ export default {
     <section>
         <h1 class="text-center">Ristoranti</h1>
         <div class="wrapper d-flex align-items-center justify-content-center flex-wrap">
-            <AppRestaurantCard v-for="(restaurant, index) in this.store.restaurantsArray" :restaurant="restaurant">
-            </AppRestaurantCard>
+            <template v-if="this.store.filteredRestaurants && this.store.filteredRestaurants.length > 0">
+                <AppRestaurantCard v-for="(restaurant, index) in this.store.filteredRestaurants" :restaurant="restaurant">
+                </AppRestaurantCard>
+            </template>
+            <template v-else>
+                <AppRestaurantCard v-for="(restaurant, index) in this.store.restaurantsArray" :restaurant="restaurant">
+                </AppRestaurantCard>
+            </template>
         </div>
     </section>
 </template>

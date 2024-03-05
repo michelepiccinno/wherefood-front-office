@@ -16,6 +16,9 @@ export default {
         }
     },
     methods: {
+        getFullImagePath(imagePath) {
+            return 'http://127.0.0.1:8000/storage/' + imagePath;
+        },
         toggleCategory(categoryId) {
             const index = this.store.selectedCategories.indexOf(categoryId);
             if (index !== -1) {
@@ -44,6 +47,7 @@ export default {
                     class="cat-wrap d-flex flex-column align-items-center">
                     <button @click="toggleCategory(category.id)" :class="{ active: isCategorySelected(category.id) }">
                         <div class="img-wrap">
+                            <img :src="getFullImagePath(category.image)" />
                         </div>
                         <div class="title-wrap">
                             <div class="cat-name">
@@ -63,6 +67,11 @@ export default {
     position: relative;
 }
 
+button {
+    background: none;
+    border: none;
+}
+
 .section-title {
     margin: auto;
     width: 100%;
@@ -72,16 +81,6 @@ export default {
 
 .bg-cat {
     width: 100%;
-
-    //background-image: url(menus.webp);
-    background-image: url(menus.jpg);
-    background-size: contain;
-
-
-
-
-
-
 
     h3 {
         text-align: center;
@@ -102,7 +101,7 @@ export default {
 .wrapper {
     background-color: rgba(0, 0, 0, 0);
     margin: 0 auto;
-    min-height: 40vh;
+    min-height: 30vh;
     display: flex;
     scroll-behavior: smooth;
     // overflow-x: hidden;
@@ -117,7 +116,12 @@ export default {
     height: 150px;
     width: 150px;
     border-radius: 50%;
-    background-color: rgb(0, 0, 0);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
 
 }
 
@@ -130,7 +134,6 @@ export default {
     font-family: "Playfair Display", serif;
     font-style: italic;
     color: rgb(255, 255, 255);
-    position: absolute;
     font-size: 14px;
     font-weight: 800;
     vertical-align: middle;
@@ -155,22 +158,22 @@ export default {
     width: 5px;
     height: 14px;
 
-    background-color: #000000;
-    border: 2px solid #000000;
+    // background-color: #000000;
+    // border: 2px solid #000000;
 
 
 
 }
 
-.horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
-    background: #26FF56;
-    border-top: 0.5px solid #000000;
-    border-bottom: 0.5px solid #000000;
-    border-radius: 5px;
-    width: 100px;
+// .horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
+//     background: #26FF56;
+//     border-top: 0.5px solid #000000;
+//     border-bottom: 0.5px solid #000000;
+//     border-radius: 5px;
+//     width: 100px;
 
 
-}
+// }
 
 .horizontal-scrollbar {
 

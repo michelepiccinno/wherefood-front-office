@@ -1,5 +1,5 @@
 <script>
-import { store } from "../store.js"; // Importa lo store
+import { store } from "../store.js";
 
 export default {
     name: "AppHeader",
@@ -11,9 +11,6 @@ export default {
         }
     },
     methods: {
-        redirectToLogin() {
-            window.location.href = 'http://127.0.0.1:8000/login';
-        },
         toggleCart() {
             this.isCartOpen = !this.isCartOpen;
         },
@@ -24,27 +21,30 @@ export default {
                 item.price === product.price
             ));
 
-            if (existingProduct) {
-                existingProduct.quantity++;
-                this.$toasted.show(`Quantità di ${product.name} nel carrello aumentata`, { duration: 3000 });
-            } else {
-                const newProduct = { ...product, quantity: 1 };
-                this.store.cartItems.push(newProduct);
-                this.uniqueOrders.push(newProduct);
-                this.$toasted.show(`${product.name} aggiunto al carrello`, { duration: 3000 });
-            }
+  if (existingProduct) {
+    // Se il prodotto esiste già nel carrello, aggiungi la quantità
+    existingProduct.quantity += product.quantity;
+  } else {
+    // Se il prodotto non esiste nel carrello, aggiungilo come nuovo articolo
+    this.store.cartItems.push(product);
+  }
 
-            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
-        },
+  localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+},
+
 
         removeFromCart(index) {
             this.store.cartItems.splice(index, 1);
-            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems)); 
         },
     },
-
+    
 }
 </script>
+
+
+
+
 
 
 
@@ -65,8 +65,7 @@ export default {
         </div>
         <div>
             <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
-            <button class="header-btn" @click=redirectToLogin()><i class="fa-solid fa-right-to-bracket"><span>Log
-                        in</span></i></button>
+            <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
             <button class="header-btn" @click="toggleCart"><i
                     class="fa-solid fa-cart-shopping"><span>Carrello</span></i></button>
 
@@ -97,6 +96,25 @@ export default {
 </template>
 
 <style scoped lang="scss">
+
+    
+.remove-button {
+  background-color: transparent; /* Sfondo trasparente */
+  color: #333; /* Colore del testo */
+  border: 2px solid #333; /* Bordo solido */
+  padding: 8px 15px; /* Spaziatura interna */
+  border-radius: 5px; /* Bordo arrotondato */
+  font-size: 14px; /* Dimensione del testo */
+  font-weight: bold; /* Testo in grassetto */
+  text-transform: uppercase; /* Testo in maiuscolo */
+  cursor: pointer; /* Mostra il cursore come un puntatore */
+  transition: all 0.3s ease; /* Transizione per tutti gli effetti */
+}
+
+.remove-button:hover {
+  background-color: #333; /* Cambia colore al passaggio del mouse */
+  color: #fff; /* Cambia colore del testo */
+}
 .nav {
     height: 80px;
     width: 100%;
@@ -117,9 +135,6 @@ export default {
         color: #53fc5b;
     }
 
-
-
-
 }
 
 img {
@@ -133,8 +148,6 @@ img {
     border-radius: 10px;
     min-width: 500px;
     height: 40px;
-
-
 }
 
 .searchBar:hover {
@@ -148,20 +161,12 @@ img {
     }
 }
 
-
-
-
-
-
 ::placeholder {
     color: #646464;
     opacity: 0.5;
     text-align: center;
     font-size: 14px;
 }
-
-
-
 .search {
 
 

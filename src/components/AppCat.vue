@@ -1,7 +1,6 @@
 <script>
-
-import axios from 'axios'; //importo Axios
-import { store } from "../store.js"
+import axios from 'axios';
+import { store } from "../store.js";
 
 export default {
     name: "AppCat",
@@ -13,55 +12,42 @@ export default {
     },
     data() {
         return {
-
             store
         }
-    }, methods: {
-        addCategory(category) {
-            this.store.selectedCategories.push(category);
-            console.log("ciao")
+    },
+    methods: {
+        toggleCategory(categoryId) {
+            const index = this.store.selectedCategories.indexOf(categoryId);
+            if (index !== -1) {
+                this.store.selectedCategories.splice(index, 1); // Rimuovi categoria se presente
+            } else {
+                this.store.selectedCategories.push(categoryId); // Aggiungi categoria se assente
+            }
             this.filterRestaurant();
+        },
+        isCategorySelected(categoryId) {
+            return this.store.selectedCategories.includes(categoryId);
         }
     },
-
     mounted() {
-        this.$nextTick(() => {
-            const scrollContainer = document.querySelector(".wrapper");
-
-            if (scrollContainer) {
-                scrollContainer.addEventListener("wheel", (evt) => {
-                    evt.preventDefault();
-                    scrollContainer.scrollLeft += evt.deltaY * 3;
-                }, { passive: false });
-            } else {
-                console.error("Element with class 'wrapper' not found");
-            }
-        });
     }
 }
 </script>
 
 <template>
     <div class="template">
-
         <div class="bg-cat">
             <div class="up-wrapper">
-
-                <!-- <h3>Categories</h3> -->
             </div>
-
             <div class="wrapper  justify-space-between align-items-center horizontal-scrollbar">
-                <div v-for="(category, index) in this.store.categoriesArray" :key="index" href=""
+                <div v-for="(category, index) in store.categoriesArray" :key="index" href=""
                     class="cat-wrap d-flex flex-column align-items-center">
-                    <button @click=addCategory(category.id)>
-
+                    <button @click="toggleCategory(category.id)" :class="{ active: isCategorySelected(category.id) }">
                         <div class="img-wrap">
-
                         </div>
                         <div class="title-wrap">
                             <div class="cat-name">
                                 <p>{{ category.name }}</p>
-
                             </div>
                         </div>
                     </button>

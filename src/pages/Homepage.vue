@@ -65,7 +65,21 @@ export default {
             modules: [Autoplay, Navigation],
         };
     },
-};
+    computed: {
+        restaurantsToShow: function () {
+            return this.store.filteredRestaurants.length > 0 ? this.store.filteredRestaurants : this.store.restaurantsArray;
+        }
+    },
+    watch: {
+        'store.filteredRestaurants': function (newVal, oldVal) {
+            if (newVal.length === 0) {
+                this.restaurantsToShow = this.store.restaurantsArray;
+            } else {
+                this.restaurantsToShow = newVal;
+            }
+        },
+    }
+}
 
 </script>
 
@@ -99,13 +113,12 @@ export default {
     <section>
         <h1 class="text-center">Ristoranti</h1>
         <div class="wrapper d-flex align-items-center justify-content-center flex-wrap">
-            <template v-if="this.store.filteredRestaurants && this.store.filteredRestaurants.length > 0">
-                <AppRestaurantCard v-for="(restaurant, index) in this.store.filteredRestaurants" :restaurant="restaurant">
+            <template v-if="restaurantsToShow.length > 0">
+                <AppRestaurantCard v-for="(restaurant, index) in restaurantsToShow" :restaurant="restaurant">
                 </AppRestaurantCard>
             </template>
             <template v-else>
-                <AppRestaurantCard v-for="(restaurant, index) in this.store.restaurantsArray" :restaurant="restaurant">
-                </AppRestaurantCard>
+                <p>Nessun ristorante disponibile.</p>
             </template>
         </div>
     </section>

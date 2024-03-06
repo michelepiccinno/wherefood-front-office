@@ -270,7 +270,7 @@ button {
         .wrapper {
             background-color: rgba(0, 0, 0, 0);
             margin: 0 auto;
-            height: 40vh;
+            height: 30vh !important;
             display: flex;
             scroll-behavior: smooth;
             // overflow-x: hidden;

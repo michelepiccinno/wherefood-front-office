@@ -162,8 +162,27 @@ export default {
         img {
             text-align: center !important;
             width: 130px !important;
+
             margin-left: 45px;
         }
+    }
+}
+
+@media screen and (max-width : 1200px) {
+    .mySwiper {
+        height: 400px;
+    }
+
+    .middle-cont {
+
+
+        p {
+            font-size: 30px !important;
+            line-height: 30px !important;
+            padding: 0 !important;
+        }
+
+
     }
 }
 </style>

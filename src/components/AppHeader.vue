@@ -277,4 +277,18 @@ img {
         }
     }
 }
+
+@media screen and (max-width : 1200px) {
+    .nav {
+        height: 60px;
+
+        img {
+            height: 50px;
+        }
+
+        span {
+            display: none;
+        }
+    }
+}
 </style>

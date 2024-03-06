@@ -153,6 +153,10 @@ section {
     }
 }
 
+.search_input{
+    border: 2px solid #26ff56;
+}
+
 .opacity {
     opacity: 0.3;
 }

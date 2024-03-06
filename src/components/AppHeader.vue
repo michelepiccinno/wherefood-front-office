@@ -109,8 +109,8 @@ export default {
     position: absolute;
     top: -7px;
     right: -10px;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     background-color: rgb(217, 0, 0);
     color: white;
     border-radius: 50%;
@@ -118,9 +118,10 @@ export default {
     text-align: center;
 
     p {
-        font-size: 10px;
+        font-size: 12px;
         margin: 0 !important;
-        line-height: 9px;
+        line-height: 10px;
+        font-weight: 800;
 
     }
 }
@@ -325,9 +326,10 @@ img {
         text-align: center;
 
         p {
-            font-size: 10px;
+            font-size: 8px;
             margin: 0 !important;
-            line-height: 9px;
+            line-height: 7px;
+            font-weight: 600;
 
         }
     }
@@ -361,7 +363,7 @@ img {
         p {
             font-size: 10px;
             margin: 0 !important;
-            line-height: 9px;
+            line-height: 5px;
 
         }
     }

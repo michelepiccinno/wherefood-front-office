@@ -12,42 +12,41 @@ export default {
     },
     data() {
         return {
-            store
+            store,
         }
     },
     methods: {
         getFullImagePath(imagePath) {
             return 'http://127.0.0.1:8000/storage/' + imagePath;
         },
-        toggleCategory(categoryId) {
-            const index = this.store.selectedCategories.indexOf(categoryId);
+        toggleCategory(category) {
+            const index = this.store.selectedCategories.indexOf(category.id);
             if (index !== -1) {
-                this.store.selectedCategories.splice(index, 1); // Rimuovi categoria se presente
+                this.store.selectedCategories.splice(index, 1);
             } else {
-                this.store.selectedCategories.push(categoryId); // Aggiungi categoria se assente
+                this.store.selectedCategories.push(category.id);
             }
             this.filterRestaurant();
         },
-        isCategorySelected(categoryId) {
-            return this.store.selectedCategories.includes(categoryId);
-        }
+        isCategorySelected(category) {
+            return this.store.selectedCategories.includes(category.id);
+        },
+        toggleEffect(category) {
+            category.isClicked = !category.isClicked;
+        },
     },
-    mounted() {
-    }
 }
 </script>
 
 <template>
     <div class="template">
         <div class="bg-cat">
-            <div class="up-wrapper">
-            </div>
-            <div class="wrapper  justify-space-between align-items-center horizontal-scrollbar">
-                <div v-for="(category, index) in store.categoriesArray" :key="index" href=""
-                    class="cat-wrap d-flex flex-column align-items-center">
-                    <button @click="toggleCategory(category.id)" :class="{ active: isCategorySelected(category.id) }">
-                        <div class="img-wrap">
-                            <img :src="getFullImagePath(category.image)" />
+            <div class="up-wrapper"></div>
+            <div class="wrapper justify-space-between align-items-center horizontal-scrollbar">
+                <div v-for="category in store.categoriesArray" :key="category.id" class="cat-wrap">
+                    <button @click="toggleCategory(category)" :class="{ active: isCategorySelected(category) }">
+                        <div id="img-wrap" :class="{ 'cliccato': category.isClicked }" @click="toggleEffect(category)">
+                            <img :src="getFullImagePath(category.image)" alt="Category Image" />
                         </div>
                         <div class="title-wrap">
                             <div class="cat-name">
@@ -62,7 +61,23 @@ export default {
 </template>
 
 <style scoped lang="scss">
+.cliccato {
+    img {
+
+        filter: none !important;
+        opacity: 1 !important;
+    }
+
+}
+
 .template {
+    img {
+        filter: grayscale(1);
+        opacity: 0.4;
+
+
+    }
+
     color: black;
     position: relative;
 }
@@ -100,7 +115,7 @@ button {
 
 .wrapper {
     background-color: rgba(0, 0, 0, 0);
-    margin: 0 auto;
+    margin: 0 auto 2rem 0;
     min-height: 30vh;
     display: flex;
     scroll-behavior: smooth;
@@ -110,17 +125,21 @@ button {
 
 
 
+
 }
 
-.img-wrap {
+#img-wrap {
     height: 150px;
     width: 150px;
     border-radius: 50%;
+
 
     img {
         width: 100%;
         height: 100%;
         object-fit: contain;
+
+
     }
 
 }
@@ -130,6 +149,7 @@ button {
 }
 
 .title-wrap {
+
     background-color: #911710;
     font-family: "Playfair Display", serif;
     font-style: italic;
@@ -156,7 +176,7 @@ button {
 
 .horizontal-scrollbar::-webkit-scrollbar {
     width: 5px;
-    height: 5px;
+    height: 18px;
 
     background-color: #222222;
     border: 2px solid #222222;
@@ -177,7 +197,7 @@ button {
 
 .horizontal-scrollbar {
 
-    width: 70%;
+    width: 90%;
     overflow: auto;
     height: 120px;
 
@@ -190,8 +210,10 @@ button {
 
 @media screen and (max-width: 768px) {
     .img-wrap {
-        height: 80px;
-        width: 80px;
+        height: 40px !important;
+        width: 40px !important;
+
+
     }
 
     .wrapper {
@@ -250,6 +272,15 @@ button {
 
 
     @media screen and (max-width : 1200px) {
+        .horizontal-scrollbar {
+
+            width: 90%;
+            overflow: auto;
+            height: 80px;
+
+
+
+        }
 
         .up-wrapper {
             background-color: rgba(0, 0, 0, 0.429);
@@ -259,7 +290,7 @@ button {
         .wrapper {
             background-color: rgba(0, 0, 0, 0);
             margin: 0 auto;
-            height: 30vh !important;
+            height: 20vh !important;
             display: flex;
             scroll-behavior: smooth;
             // overflow-x: hidden;
@@ -271,7 +302,7 @@ button {
         }
 
         .img-wrap {
-
+            width: 50px !important;
             border-radius: 50%;
             background-color: rgb(0, 0, 0);
 
@@ -309,7 +340,7 @@ button {
 
         .horizontal-scrollbar::-webkit-scrollbar {
             width: 5px;
-            height: 14px;
+            height: 25px;
 
             background-color: #222222;
             border: 2px solid #222222;

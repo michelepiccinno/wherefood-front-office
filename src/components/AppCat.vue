@@ -104,7 +104,7 @@ button {
     min-height: 30vh;
     display: flex;
     scroll-behavior: smooth;
-
+    width: 90%;
     padding: 0 1rem;
     position: relative;
 
@@ -158,8 +158,8 @@ button {
     width: 5px;
     height: 5px;
 
-    background-color: #000000;
-    border: 2px solid #000000;
+    background-color: #222222;
+    border: 2px solid #222222;
 
 
 
@@ -167,8 +167,8 @@ button {
 
 .horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
     background: #26FF56;
-    border-top: 0.5px solid #000000;
-    border-bottom: 0.5px solid #000000;
+    border-top: 0.5px solid #222222;
+    border-bottom: 0.5px solid #222222;
     border-radius: 5px;
 
 
@@ -223,8 +223,8 @@ button {
 
         height: 3px !important;
         padding-top: 0.5rem;
-        background-color: #496E91 !important;
-        border: 1px solid #496E91 !important;
+        background-color: #222222 !important;
+        border: 1px solid #222222 !important;
 
 
 
@@ -311,16 +311,16 @@ button {
             width: 5px;
             height: 14px;
 
-            background-color: #000000;
-            border: 2px solid #000000;
+            background-color: #222222;
+            border: 2px solid #222222;
 
 
 
         }
 
         .horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
-            border-top: 0.5px solid #000000;
-            border-bottom: 0.5px solid #000000;
+            border-top: 0.5px solid #222222;
+            border-bottom: 0.5px solid #222222;
             border-radius: 5px;
             width: 100px;
 

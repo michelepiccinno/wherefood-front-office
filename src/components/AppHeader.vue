@@ -64,68 +64,69 @@ export default {
 </script>
 
 <template>
-  <div class="nav d-flex justify-content-between align-items-center">
-    <router-link :to="{ name: 'home' }">
-      <img src="WHEREFOOD.png" alt="">
-    </router-link>
-    <div>
-      <div class="search__container">
-        <input class="search__input" type="text" placeholder="Cerca">
-      </div>
-    </div>
-    <div>
-      <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
-      <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
-      <button class="header-btn" @click="toggleCart">
-        <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
-        <span class="StyleCount" v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
-      </button>
-      <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 600px;" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title">Il Tuo Carrello</h5>
-          <button @click="toggleCart" type="button" class="btn-close" data-bs-dismiss="offcanvas"
-            aria-label="Close">X</button>
-        </div>
-        <div class="offcanvas-body">
-          <div class="row">
-            <div class="col-12 d-flex">
-              <div class="ProdottoStyle">
-                  Prodotto
-              </div>
-              <div class="PrezzoStyle">
-                  Prezzo
-              </div>
-              <div class="QuantitaStyle">
-                  Quantità
-              </div>
+    <div class="nav d-flex justify-content-between align-items-center">
+        <router-link :to="{ name: 'home' }">
+            <img src="WHEREFOOD.png" alt="">
+        </router-link>
+        <div>
+            <div class="search__container">
+                <input class="search__input" type="text" placeholder="Cerca">
             </div>
-          </div>
-          <ul class="" v-if="store.cartItems.length > 0">
-            <li class="d-flex align-items-center" v-for="(item, index) in store.cartItems" :key="index"> 
-              <div class="d-flex align-items-center liststyle">
-                <div class="NameStyle">
-                    {{ item.name }} 
-                </div>
-               <div class="PriceStyle">
-                   {{ totalOrderPrice(index) }}€
-                </div>
-              </div>
-              <div>
-                    <div class="ButtonContainer">
-                       <div class="QuantityStyle ">
-                         {{ item.quantity }}
-                        </div>
-                        <button class="increase-button m-2" @click="incrementQuantity(index)">+</button>
-                        <button class="decrease-button m-2" @click="decrementQuantity(index)">-</button>          
-                    </div>
-              </div>
-            </li>
-          </ul>
-          <div class="EmptyCart" v-if="store.cartItems.length === 0">Il carrello è vuoto</div>
         </div>
-      </div>
+        <div>
+            <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
+            <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
+            <button class="header-btn" @click="toggleCart">
+                <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
+                <span class="StyleCount" v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
+            </button>
+            <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 600px;" :class="{ 'show': isCartOpen }"
+                id="cartOffcanvas" tabindex="-1">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">Il Tuo Carrello</h5>
+                    <button @click="toggleCart" type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                        aria-label="Close">X</button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="row">
+                        <div class="col-12 d-flex">
+                            <div class="ProdottoStyle">
+                                Prodotto
+                            </div>
+                            <div class="PrezzoStyle">
+                                Prezzo
+                            </div>
+                            <div class="QuantitaStyle">
+                                Quantità
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="" v-if="store.cartItems.length > 0">
+                        <li class="d-flex align-items-center" v-for="(item, index) in store.cartItems" :key="index">
+                            <div class="d-flex align-items-center liststyle">
+                                <div class="NameStyle">
+                                    {{ item.name }}
+                                </div>
+                                <div class="PriceStyle">
+                                    {{ totalOrderPrice(index) }}€
+                                </div>
+                            </div>
+                            <div>
+                                <div class="ButtonContainer">
+                                    <div class="QuantityStyle ">
+                                        {{ item.quantity }}
+                                    </div>
+                                    <button class="increase-button m-2" @click="incrementQuantity(index)">+</button>
+                                    <button class="decrease-button m-2" @click="decrementQuantity(index)">-</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="EmptyCart" v-if="store.cartItems.length === 0">Il carrello è vuoto</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 
@@ -133,150 +134,160 @@ export default {
 
 
 <style scoped lang="scss">
+.ProdottoStyle {
+    margin: 0px 5px 10px 20px;
+    padding: 8px 10px;
+    color: #41b60b;
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 41px
+}
 
-.ProdottoStyle
-{
-  margin: 0px 5px 10px 20px;
-  padding: 8px 10px;
-  color: #41b60b;
-  border: 2px solid #333;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 41px
+.totalpriceStyle {
+    margin: 0px 5px 10px 20px;
+    padding: 8px 10px;
+    color: #41b60b;
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 41px
 }
-.totalpriceStyle{
-   margin: 0px 5px 10px 20px;
-  padding: 8px 10px;
-  color: #41b60b;
-  border: 2px solid #333;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 41px
+
+.PrezzoStyle {
+    margin: 0px 20px 10px 22px;
+    padding: 8px 10px;
+    color: #41b60b;
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 41px
 }
-.PrezzoStyle{
-  margin: 0px 20px 10px 22px;
-  padding: 8px 10px;
-  color: #41b60b;
-  border: 2px solid #333;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 41px
+
+.QuantitaStyle {
+    margin: 0px 20px 10px 25px;
+    padding: 8px 10px;
+    color: #41b60b;
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 41px
 }
-.QuantitaStyle{
-  margin: 0px 20px 10px 25px;
-  padding: 8px 10px;
-  color: #41b60b;
-  border: 2px solid #333;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 41px
+
+.PrezzoTotaleStyle {
+    margin: 0px 10px 10px 25px;
+    padding: 8px 10px;
+    color: #41b60b;
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 41px
 }
-.PrezzoTotaleStyle{
- margin: 0px 10px 10px 25px;
-  padding: 8px 10px;
-  color: #41b60b;
-  border: 2px solid #333;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 41px
+
+.QuantityStyle {
+
+    color: #41b60b;
+    border: 2px solid #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 41px;
+    margin-left: 17px;
+    margin-right: 35px;
 
 }
-.QuantityStyle{
 
-  color: #41b60b;
-  border: 2px solid #333;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 41px;
-  margin-left: 17px;
-  margin-right: 35px;
-  
+.EmptyCart {
+    margin-top: 200px;
+    margin-left: 140px;
+    font-weight: bold;
+    font-size: 30px;
 }
-.EmptyCart{
-  margin-top: 200px;
-  margin-left: 140px;
-  font-weight: bold;
-  font-size: 30px;
-}
-.priceStyle{
-  margin-left: 30px;
+
+.priceStyle {
+    margin-left: 30px;
 }
 
 .liststyle {
-  width: 250px;
+    width: 250px;
 }
-.NameStyle{
-  width: 120px;
+
+.NameStyle {
+    width: 120px;
 }
-.ButtonContainer{
-  display: flex;
+
+.ButtonContainer {
+    display: flex;
     width: 200px;
-  align-items: center;
+    align-items: center;
 }
+
 .remove-button {
-  background-color: transparent;
-  color: #333;
-  border: 2px solid #333;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 41px;
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 41px;
 }
-.decrease-button{
-   background-color: transparent;
-  color: #333;
-  border: 2px solid #333;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 41px;
+
+.decrease-button {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 41px;
 }
-.increase-button{
-  background-color: transparent;
-  color: #333;
-  border: 2px solid #333;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 41px;
+
+.increase-button {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 41px;
 }
+
 .decrease-button:hover,
 .increase-button:hover {
     background-color: #333;
@@ -295,28 +306,28 @@ export default {
         padding: 0.5rem;
     }
 
-  i:hover {
-    color: #53fc5b;
-    transition: all 0.3s ease-in-out;
-  }
+    i:hover {
+        color: #53fc5b;
+        transition: all 0.3s ease-in-out;
+    }
 
 }
 
 img {
-  height: 50px;
+    height: 50px;
 }
 
 .searchBar {
-  background-color: rgba(75, 252, 113, 0);
-  border-color: #ffffff;
-  opacity: 0.5;
-  border-radius: 10px;
-  min-width: 500px;
-  height: 40px;
+    background-color: rgba(75, 252, 113, 0);
+    border-color: #ffffff;
+    opacity: 0.5;
+    border-radius: 10px;
+    min-width: 500px;
+    height: 40px;
 }
 
 .searchBar:hover {
-  opacity: 1;
+    opacity: 1;
 }
 
 .searchBtn {
@@ -326,10 +337,10 @@ img {
 }
 
 ::placeholder {
-  color: #646464;
-  opacity: 0.5;
-  text-align: center;
-  font-size: 14px;
+    color: #646464;
+    opacity: 0.5;
+    text-align: center;
+    font-size: 14px;
 }
 
 .search {
@@ -338,131 +349,171 @@ img {
         padding: 12px 24px;
 
 
-    background-color: transparent;
-    transition: transform 250ms ease-in-out;
-    font-size: 14px;
-    line-height: 18px;
+        background-color: transparent;
+        transition: transform 250ms ease-in-out;
+        font-size: 14px;
+        line-height: 18px;
 
-    color: #575756;
-    background-color: transparent;
-    background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
+        color: #575756;
+        background-color: transparent;
+        background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
 
 
-    border-radius: 50px;
-    border: 1px solid #575756;
-    transition: all 250ms ease-in-out;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
+        border-radius: 50px;
+        border: 1px solid #575756;
+        transition: all 250ms ease-in-out;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
 
-    &::placeholder {
-      color: color(#575756 a(0.8));
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
+        &::placeholder {
+            color: color(#575756 a(0.8));
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        &:hover,
+        &:focus {
+
+            outline: 0;
+            border: 1px solid transparent;
+            border-bottom: 1px solid #53fc5b;
+            border-radius: 0;
+            background-position: 100% center;
+        }
     }
-
-    &:hover,
-    &:focus {
-
-      outline: 0;
-      border: 1px solid transparent;
-      border-bottom: 1px solid #53fc5b;
-      border-radius: 0;
-      background-position: 100% center;
-    }
-  }
 }
 
 .search-btn {
-  padding-left: 1rem;
+    padding-left: 1rem;
 
-  color: #646464;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 18px;
+    color: #646464;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 18px;
 
-  .search-btn:hover {
+    .search-btn:hover {
 
-    border-bottom: 1px solid #53fc5b !important;
-  }
+        border-bottom: 1px solid #53fc5b !important;
+    }
 }
 
 
 .offcanvas-body {
-  background-color: #000000;
+    background-color: #000000;
 
-  color: white;
+    color: white;
 }
 
 .offcanvas-header {
-  background-color: #000000;
-  color: white;
-
-  .offcanvas-title {
+    background-color: #000000;
     color: white;
 
-  }
+    .offcanvas-title {
+        color: white;
 
-  .btn-close {
-    color: white;
-  }
+    }
+
+    .btn-close {
+        color: white;
+    }
 }
 
 .round-img {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  background-color: #53fc5b;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #53fc5b;
 }
 
 .header-btn {
-  border-radius: 10px;
-  border-style: none;
-  background: #64646421;
-  margin: 0 0.25rem;
-  color: color(#575756 a(0.8));
-  width: 165px;
+    border-radius: 10px;
+    border-style: none;
+    background: #64646421;
+    margin: 0 0.25rem;
+    color: color(#575756 a(0.8));
 
 
-  span {
-    padding-left: 0.5rem
-  }
+
+    span {
+        padding-left: 0.5rem
+    }
 }
 
 .header-btn:hover {
-  background: none;
-  transition: all 0.5s ease-in-out;
-  border: 1px solid #646464;
+    background: none;
+    transition: all 0.5s ease-in-out;
+    border: 1px solid #646464;
 
-  span {
-    color: #646464;
-  }
+    span {
+        color: #646464;
+    }
 }
 
 @media screen and (max-width: 768px) {
-  .nav {
-    height: 50px !important;
+    .cart-icon {
 
-    img {
-      height: 20px !important;
+        top: -2px;
+
+        width: 15px;
+        height: 15px;
+        background-color: rgb(217, 0, 0);
+        color: white;
+        border-radius: 50%;
+        padding: 5px;
+        text-align: center;
+
+        p {
+            font-size: 8px;
+            margin: 0 !important;
+            line-height: 7px;
+            font-weight: 600;
+
+        }
     }
 
-    span {
-      display: none !important;
+    .nav {
+        height: 50px !important;
+
+        img {
+            height: 20px !important;
+        }
+
+        span {
+            display: none !important;
+        }
     }
-  }
 }
 
 @media screen and (max-width : 1200px) {
-  .nav {
-    height: 60px;
+    .cart-icon {
 
-    img {
-      height: 50px;
+        top: -2px;
+
+        width: 15px;
+        height: 15px;
+        background-color: rgb(217, 0, 0);
+        color: white;
+        border-radius: 50%;
+        padding: 5px;
+        text-align: center;
+
+        p {
+            font-size: 10px;
+            margin: 0 !important;
+            line-height: 5px;
+
+        }
     }
 
-    span {
-      display: none;
+    .nav {
+        height: 60px;
+
+        img {
+            height: 50px;
+        }
+
+        span {
+            display: none;
+        }
     }
-  }
-}
-</style>
+}</style>

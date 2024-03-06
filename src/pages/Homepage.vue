@@ -97,8 +97,8 @@ export default {
             delay: 2500,
             disableOnInteraction: false,
         }" :pagination="{
-    clickable: true,
-}" :navigation="true" :modules="modules" class="mySwiper">
+    clickable: false,
+}" :navigation="false" :modules="modules" class="mySwiper">
 
             <swiper-slide class="opacity burger-bg"></swiper-slide>
             <swiper-slide class="opacity pizza-bg"></swiper-slide>

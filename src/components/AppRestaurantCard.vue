@@ -39,7 +39,10 @@ export default {
     <div class="__area text-center">
         <a href="#" class="__card">
             <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
-            <img :src="getFullImagePath(restaurant.image)" class="img-fluid __img" />
+            <div class="img-wrap">
+                <img :src="getFullImagePath(restaurant.image)" class="img-fluid __img" />
+
+            </div>
             <div class="__card_detail text-left">
                 <h4>{{ restaurant.name }}</h4>
                 <p>
@@ -61,6 +64,18 @@ export default {
 </template>
 
 <style scoped lang="scss">
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.img-wrap {
+    width: 350px;
+    height: 200px;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
 .wrapper {
     width: 80%;
     margin: auto;
@@ -89,6 +104,7 @@ export default {
 
 .__img {
     border-radius: 10px;
+
 }
 
 .__favorit {

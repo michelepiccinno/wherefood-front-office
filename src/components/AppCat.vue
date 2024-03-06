@@ -104,7 +104,7 @@ button {
     min-height: 30vh;
     display: flex;
     scroll-behavior: smooth;
-    // overflow-x: hidden;
+
     padding: 0 1rem;
     position: relative;
 
@@ -158,26 +158,26 @@ button {
     width: 5px;
     height: 5px;
 
-    // background-color: #000000;
-    // border: 2px solid #000000;
+    background-color: #000000;
+    border: 2px solid #000000;
 
 
 
 }
 
-// .horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
-//     background: #26FF56;
-//     border-top: 0.5px solid #000000;
-//     border-bottom: 0.5px solid #000000;
-//     border-radius: 5px;
-//     width: 100px;
+.horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
+    background: #26FF56;
+    border-top: 0.5px solid #000000;
+    border-bottom: 0.5px solid #000000;
+    border-radius: 5px;
 
 
-// }
+
+}
 
 .horizontal-scrollbar {
 
-
+    width: 70%;
     overflow: auto;
     height: 120px;
 
@@ -202,6 +202,7 @@ button {
 
     .horizontal-scrollbar {
         height: 100px;
+        width: 90%;
 
     }
 
@@ -222,16 +223,16 @@ button {
 
         height: 3px !important;
         padding-top: 0.5rem;
-        background-color: #000000;
-        border: 1px solid #000000;
+        background-color: #496E91 !important;
+        border: 1px solid #496E91 !important;
 
 
 
     }
 
     .horizontal-scrollbar::-webkit-scrollbar-thumb:horizontal {
-        border-top: 0.5px solid #000000;
-        border-bottom: 0.5px solid #000000;
+        border-top: 0.5px solid #00000000;
+        border-bottom: 0.5px solid #00000000;
         border-radius: 5px;
         width: 100px;
         background: #26FF56;

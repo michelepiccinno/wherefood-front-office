@@ -266,14 +266,14 @@ img {
 
 @media screen and (max-width: 768px) {
     .nav {
-        height: 50px;
+        height: 50px !important;
 
         img {
-            height: 20px;
+            height: 20px !important;
         }
 
         span {
-            display: none;
+            display: none !important;
         }
     }
 }

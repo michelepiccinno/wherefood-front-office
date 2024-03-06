@@ -92,6 +92,9 @@ export default {
             </li>
           </ul>
           <p v-else>Il carrello è vuoto</p>
+          <router-link :to="{ name: 'checkout' }">
+            <button class="btn btn-primary" @click="">CHECKOUT</button>
+          </router-link>
         </div>
       </div>
     </div>

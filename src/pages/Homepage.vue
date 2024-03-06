@@ -65,7 +65,7 @@ export default {
     },
     computed: {
         restaurantsToShow: function () {
-            return this.store.filteredRestaurants.length > 0 ? this.store.filteredRestaurants : this.store.restaurantsArray;
+            return this.store.filteredRestaurants.length > 0 ? this.store.filteredRestaurants : '';
         }
     },
 }
@@ -113,7 +113,7 @@ export default {
             </template>
 
             <template v-else>
-                <p>Nessun ristorante disponibile.</p>
+                <p>Nessun ristorante disponibile per i criteri di ricerca richiesti</p>
             </template>
         </div>
     </section>

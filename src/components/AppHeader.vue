@@ -29,72 +29,87 @@ export default {
                 this.store.cartItems[index].quantity--;
             }
 
-            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
-        },
-        updateCart(product, quantity) {
-            const index = this.store.cartItems.findIndex(item => item.id === product.id);
-            if (index !== -1) {
-                this.store.cartItems[index].quantity += quantity;
-            }
-        },
-        isInCart(product) {
-            return this.store.cartItems.some(item => item.id === product.id);
-        }
+      localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
     },
-    computed: {
-        totalCartItems() {
-            return this.store.cartItems.reduce((total, item) => total + item.quantity, 0);
-        }
+    updateCart(product, quantity) {
+      const index = this.store.cartItems.findIndex(item => item.id === product.id);
+      if (index !== -1) {
+        this.store.cartItems[index].quantity += quantity;
+      }
+    },
+    isInCart(product) {
+      return this.store.cartItems.some(item => item.id === product.id);
+    },
+    incrementQuantity(index) {
+      this.store.cartItems[index].quantity++;
+      localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+    },
+    decrementQuantity(index) {
+      if (this.store.cartItems[index].quantity > 1) {
+        this.store.cartItems[index].quantity--;
+        localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+      }
+    },
+  },
+  computed: {
+    totalCartItems() {
+      return this.store.cartItems.reduce((total, item) => total + item.quantity, 0);
     }
+  }
 }
 </script>
 
-
 <template>
-    <div class="nav d-flex justify-content-between align-items-center">
-        <div>
-            <img src="WHEREFOOD.png" alt="">
-        </div>
-
-        <div>
-            <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
-            <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
-            <button class="header-btn" @click="toggleCart">
-                <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
-                <span v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
-            </button>
-            <div class="offcanvas offcanvas-end" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title">Il tuo carrello</h5>
-                    <button @click="toggleCart" type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                        aria-label="Close">X</button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul v-if="store.cartItems.length > 0">
-                        <li v-for="(item, index) in store.cartItems" :key="index">
-                            {{ item.name }} - {{ item.price }} {{ item.quantity }}
-                            <button class="remove-button" @click="removeFromCart(index)">Rimuovi</button>
-                        </li>
-                    </ul>
-                    <p v-else>Il carrello è vuoto</p>
-                </div>
-            </div>
-        </div>
+  <div class="nav d-flex justify-content-between align-items-center">
+    <div>
+      <img src="WHEREFOOD.png" alt="">
     </div>
+    <div>
+      <div class="search__container">
+        <input class="search__input" type="text" placeholder="Cerca">
+      </div>
+    </div>
+    <div>
+      <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
+      <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
+      <button class="header-btn" @click="toggleCart">
+        <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
+        <span class="StyleCount" v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
+      </button>
+      <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 500px;" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Il tuo carrello</h5>
+          <button @click="toggleCart" type="button" class="btn-close" data-bs-dismiss="offcanvas"
+            aria-label="Close">X</button>
+        </div>
+        <div class="offcanvas-body">
+          <ul v-if="store.cartItems.length > 0">
+            <li class="listyle" v-for="(item, index) in store.cartItems" :key="index">
+              {{ item.name }} - {{ item.price }} € x {{ item.quantity }}
+              <button class="increase-button" @click="incrementQuantity(index)">+</button>
+              <button class="decrease-button" @click="decrementQuantity(index)">-</button>
+            </li>
+          </ul>
+          <p v-else>Il carrello è vuoto</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+
 
 <style scoped lang="scss">
 .remove-button {
-    background-color: transparent;
-    color: #333;
-    border: 2px solid #333;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background-color: transparent;
+  color: #333;
+  border: 2px solid #333;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .remove-button:hover {
@@ -215,14 +230,16 @@ img {
     }
 }
 
+
 .offcanvas-body {
-    background-color: #000000;
-    color: white;
+  background-color: #575756;
+  opacity: 0.5;
+  color: white;
 }
 
 .offcanvas-header {
-    background-color: #000000;
-    color: white;
+  background-color: #575756;
+  color: white;
 
     .offcanvas-title {
         color: white;
@@ -242,11 +259,12 @@ img {
 }
 
 .header-btn {
-    border-radius: 10px;
-    border-style: none;
-    background: #64646421;
-    margin: 0 0.25rem;
-    color: color(#575756 a(0.8));
+  border-radius: 10px;
+  border-style: none;
+  background: #64646421;
+  margin: 0 0.25rem;
+  color: color(#575756 a(0.8));
+  width: 165px;
 
 
     span {

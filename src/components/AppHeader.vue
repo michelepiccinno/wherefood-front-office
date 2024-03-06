@@ -69,9 +69,12 @@ export default {
     <div>
       <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
       <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
-      <button class="header-btn" @click="toggleCart">
+      <button class="header-btn cart-btn" @click="toggleCart">
         <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
-        <span class="StyleCount" v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
+        <div class="cart-icon">
+          <p class="StyleCount" v-if="store.cartItems.length > 0">{{ totalCartItems }}</p>
+
+        </div>
       </button>
       <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 600px;" :class="{ 'show': isCartOpen }"
         id="cartOffcanvas" tabindex="-1">
@@ -137,6 +140,27 @@ export default {
 
 
 <style scoped lang="scss">
+.cart-icon {
+  position: absolute;
+  top: 18px;
+  right: 70px;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(217, 0, 0);
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  text-align: center;
+
+  p {
+    font-size: 12px;
+    margin: 0 !important;
+    line-height: 10px;
+    font-weight: 800;
+
+  }
+}
+
 .ProdottoStyle {
   margin: 0px 5px 10px 20px;
   padding: 8px 10px;
@@ -453,7 +477,7 @@ img {
 @media screen and (max-width: 768px) {
   .cart-icon {
 
-    top: -2px;
+    top: 5px;
 
     width: 15px;
     height: 15px;

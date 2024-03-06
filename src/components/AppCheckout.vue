@@ -25,6 +25,13 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    calculateTotal() {
+      let total = 0;
+      this.store.cartItems.forEach(item => {
+        total += item.price * item.quantity;
+      });
+      return total;
     }
   }
 }
@@ -53,11 +60,16 @@ export default {
                       {{ item.name }}
                     </td>
                     <td>
-                      {{ item.price }}
+                      {{ item.price }}€
                     </td>
                     <td>
                       {{ item.quantity }}
                     </td>
+                  </tr>
+                  <tr>
+                    <td>Totale</td>
+                    <td>{{ calculateTotal() }}€</td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>
@@ -69,6 +81,7 @@ export default {
     </div>
     <div class=" row">
       <div class="col-8">
+        <h1>Inserisci i dati di pagamento</h1>
         <form @submit.prevent="submitOrder" method="POST">
 
           <div class="mb-3">
@@ -92,7 +105,7 @@ export default {
           </div>
 
           <div class="mb-3">
-            <label for="credit_card" class="form-label">CARTA DI CREDITO</label>
+            <label for="credit_card" class="form-label">Carta di credito</label>
             <input type="text" class="form-control" id="customer_number">
           </div>
 

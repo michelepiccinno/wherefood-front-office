@@ -11,8 +11,6 @@ import '../styles/general.scss';
 import { Navigation, Autoplay, Scrollbar, A11y } from 'swiper/modules';
 import AppRestaurantCard from "../components/AppRestaurantCard.vue";
 
-
-
 export default {
     name: "Homepage",
     props: {
@@ -30,36 +28,36 @@ export default {
     data() {
         return {
             store,
-
-
+            searchRestaurant: '',
         }
     },
+
     methods: {
         filterRestaurants() {
-            console.log("Filtraggio dei ristoranti alla selezione di una categoria");
-
-            const filteredRestaurants = [];
-
-            for (const restaurant of this.store.restaurantsArray) {
-                let shouldInclude = true;
-
-                for (const selectedCategory of this.store.selectedCategories) {
-                    if (!restaurant.categories.find(category => category.id === selectedCategory)) {
-                        shouldInclude = false;
-                        break;
-                    }
-                }
-
-                // Se shouldInclude è ancora true, significa che il ristorante ha tutte le categorie selezionate
-                if (shouldInclude) {
-                    filteredRestaurants.push(restaurant);
-                }
-            }
+            console.log("Filtraggio dei ristoranti");
+            const filteredRestaurants = this.store.restaurantsArray.filter(restaurant => {
+                // primo filtro per stringa di ricerca
+                const matchesSearch = this.searchRestaurant === '' || restaurant.name.toLowerCase().includes(this.searchRestaurant.toLowerCase());
+                // verifica se il ristorante ha tutte le categorie selezionate
+                const matchesCategories = this.store.selectedCategories.length === 0 || this.store.selectedCategories.every(selectedCategory =>
+                    restaurant.categories.some(category => category.id === selectedCategory)
+                );
+                return matchesSearch && matchesCategories;
+            });
             this.store.filteredRestaurants = filteredRestaurants;
-
             console.log("Ristoranti filtrati:", this.store.filteredRestaurants);
         }
     },
+
+    watch: {
+        searchRestaurant(newValue, oldValue) {
+            this.filterRestaurants(); // Chiamata alla funzione di filtro quando cambia la ricerca
+        },
+        'store.selectedCategories': function (newVal, oldVal) {
+            this.filterRestaurants(); // Chiamata alla funzione di filtro quando cambiano le categorie selezionate
+        }
+    },
+
     setup() {
         return {
             modules: [Autoplay, Navigation],
@@ -70,40 +68,26 @@ export default {
             return this.store.filteredRestaurants.length > 0 ? this.store.filteredRestaurants : this.store.restaurantsArray;
         }
     },
-    watch: {
-        'store.filteredRestaurants': function (newVal, oldVal) {
-            if (newVal.length === 0) {
-                this.restaurantsToShow = this.store.restaurantsArray;
-            } else {
-                this.restaurantsToShow = newVal;
-            }
-        },
-    }
 }
 
 </script>
 
 <template>
     <section class="jumbo-section">
-
         <div class="middle-cont">
-
             <img src="Where.png" alt="">
             <p class="playfair-display"> &ldquo;I piatti dei ristoranti che ami e la spesa, a domicilio&rdquo;
             </p>
         </div>
-
         <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
             delay: 2500,
             disableOnInteraction: false,
         }" :pagination="{
-    clickable: false,
-}" :navigation="false" :modules="modules" class="mySwiper">
-
+            clickable: false,
+        }" :navigation="false" :modules="modules" class="mySwiper">
             <swiper-slide class="opacity burger-bg"></swiper-slide>
             <swiper-slide class="opacity pizza-bg"></swiper-slide>
             <swiper-slide class="opacity jap-bg"></swiper-slide>
-
         </swiper>
 
     </section>
@@ -115,6 +99,10 @@ export default {
     <section>
         <h1 class="text-center">Seleziona una categoria</h1>
         <AppCat :filterRestaurant="filterRestaurants" />
+        <div class="search__container d-flex justify-content-center mb-3">
+            <input v-model="searchRestaurant" class="search__input bg-secondary-subtle" type="text"
+                placeholder="Filtra per nome ristorante">
+        </div>
     </section>
     <section>
         <h1 class="text-center">Ristoranti</h1>
@@ -123,6 +111,7 @@ export default {
                 <AppRestaurantCard v-for="(restaurant, index) in restaurantsToShow" :restaurant="restaurant">
                 </AppRestaurantCard>
             </template>
+
             <template v-else>
                 <p>Nessun ristorante disponibile.</p>
             </template>

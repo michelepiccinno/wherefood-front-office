@@ -39,6 +39,20 @@ export default {
     },
     isInCart(product) {
       return this.store.cartItems.some(item => item.id === product.id);
+    },
+    incrementQuantity(index) {
+      this.store.cartItems[index].quantity++;
+      localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+    },
+    decrementQuantity(index) {
+      if (this.store.cartItems[index].quantity > 1) {
+        this.store.cartItems[index].quantity--;
+        localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+      }
+    },
+    removeItem(index) {
+      this.store.cartItems.splice(index, 1);
+      localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
     }
   },
   computed: {
@@ -48,7 +62,6 @@ export default {
   }
 }
 </script>
-
 
 <template>
   <div class="nav d-flex justify-content-between align-items-center">
@@ -67,7 +80,7 @@ export default {
         <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
         <span v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
       </button>
-      <div class="offcanvas offcanvas-end" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
+      <div class="offcanvas offcanvas-end custom-offcanvas" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title">Il tuo carrello</h5>
           <button @click="toggleCart" type="button" class="btn-close" data-bs-dismiss="offcanvas"
@@ -75,9 +88,11 @@ export default {
         </div>
         <div class="offcanvas-body">
           <ul v-if="store.cartItems.length > 0">
-            <li v-for="(item, index) in store.cartItems" :key="index">
-              {{ item.name }} - {{ item.price }} {{ item.quantity }}
-              <button class="remove-button" @click="removeFromCart(index)">Rimuovi</button>
+            <li class="listyle" v-for="(item, index) in store.cartItems" :key="index">
+              {{ item.name }} - {{ item.price }} € x {{ item.quantity }}
+              <button class="increase-button" @click="incrementQuantity(index)">+</button>
+              <button class="decrease-button" @click="decrementQuantity(index)">-</button>
+              <button class="remove-button" @click="removeItem(index)">X</button>
             </li>
           </ul>
           <p v-else>Il carrello è vuoto</p>
@@ -87,7 +102,45 @@ export default {
   </div>
 </template>
 
+
 <style scoped lang="scss">
+
+.listyle{
+  width: 400px;
+}
+.decrease-button{
+   background-color: transparent;
+  color: #333;
+  border: 2px solid #333;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 5px; /* Aggiungi margine destro per separare i pulsanti */
+}
+.increase-button {
+background-color: transparent;
+  color: #333;
+  border: 2px solid #333;
+  padding: 8px 13px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 5px;
+
+}
+.decrease-button:hover,
+.increase-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
 .remove-button {
   background-color: transparent;
   color: #333;
@@ -217,6 +270,9 @@ img {
 
     border-bottom: 1px solid #53fc5b !important;
   }
+}
+.offcanvas-end {
+  width: 700px; /* Imposta la larghezza desiderata per l'offcanvas */
 }
 
 .offcanvas-body {

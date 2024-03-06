@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       store,
-      addedToCartMap: {} // Map per tenere traccia degli elementi aggiunti al carrello
+      addedToCartMap: {}
     }
   },
   mounted() {
@@ -28,6 +28,14 @@ export default {
       this.store.cartItems.push({ ...product, quantity: 1 });
       this.addedToCartMap[product.id] = true; 
       localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+    },
+    removeFromCart(product) {
+      const index = this.store.cartItems.findIndex(item => item.id === product.id);
+      if (index !== -1) {
+        this.store.cartItems.splice(index, 1);
+        delete this.addedToCartMap[product.id]; // Rimuovi l'elemento dall'addedToCartMap
+        localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+      }
     }
   }
 }
@@ -55,7 +63,14 @@ export default {
                 >
                   Aggiungi al carrello
                 </button>
-                <span v-else class="text-success">Prodotto aggiunto</span>
+                <button 
+                  v-else 
+                  type="button" 
+                  class="btn btn-danger" 
+                  @click="removeFromCart(product)"
+                >
+                  Rimuovi dal carrello
+                </button>
               </div>
             </div>
           </a>

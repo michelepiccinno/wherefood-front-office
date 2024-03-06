@@ -78,9 +78,9 @@ export default {
       <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
       <button class="header-btn" @click="toggleCart">
         <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
-        <span v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
+        <span class="StyleCount" v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
       </button>
-      <div class="offcanvas offcanvas-end custom-offcanvas" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
+      <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 500px;" :class="{ 'show': isCartOpen }" id="cartOffcanvas" tabindex="-1">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title">Il tuo carrello</h5>
           <button @click="toggleCart" type="button" class="btn-close" data-bs-dismiss="offcanvas"
@@ -92,7 +92,6 @@ export default {
               {{ item.name }} - {{ item.price }} € x {{ item.quantity }}
               <button class="increase-button" @click="incrementQuantity(index)">+</button>
               <button class="decrease-button" @click="decrementQuantity(index)">-</button>
-              <button class="remove-button" @click="removeItem(index)">X</button>
             </li>
           </ul>
           <p v-else>Il carrello è vuoto</p>
@@ -105,6 +104,11 @@ export default {
 
 <style scoped lang="scss">
 
+.StyleCount{
+  color: white;
+  margin: 0 10px 0 0;
+
+}
 .listyle{
   width: 400px;
 }
@@ -271,17 +275,16 @@ img {
     border-bottom: 1px solid #53fc5b !important;
   }
 }
-.offcanvas-end {
-  width: 700px; /* Imposta la larghezza desiderata per l'offcanvas */
-}
+
 
 .offcanvas-body {
-  background-color: #000000;
+  background-color: #575756;
+  opacity: 0.5;
   color: white;
 }
 
 .offcanvas-header {
-  background-color: #000000;
+  background-color: #575756;
   color: white;
 
   .offcanvas-title {
@@ -307,6 +310,7 @@ img {
   background: #64646421;
   margin: 0 0.25rem;
   color: color(#575756 a(0.8));
+  width: 165px;
 
 
   span {

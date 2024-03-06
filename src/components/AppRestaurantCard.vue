@@ -83,7 +83,8 @@ img {
 
 .__area {
     margin: 2rem;
-    color: #7c7671;
+    color: #6f6f6f;
+
 
 }
 
@@ -108,9 +109,9 @@ img {
 }
 
 .__favorit {
-    background-color: #fff;
+    background-color: #000000;
     border-radius: 8px;
-    color: #fc9d52;
+    color: #a2ff64;
     position: absolute;
     right: 15px;
     top: 8px;
@@ -123,8 +124,8 @@ img {
 }
 
 .__favorit:hover {
-    background-color: #fc9d52;
-    color: #fff;
+    background-color: #000000a7;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -135,29 +136,30 @@ img {
     margin: -30px 10px 0;
     position: relative;
     z-index: 2;
-    background-color: #fff;
+    background-color: #000000;
 }
 
 .__card_detail h4 {
-    color: #474340;
+    color: #c6c6c6;
     line-height: 100%;
     font-weight: bold;
+    font-size: 18px;
 }
 
 .__card_detail p {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     margin-bottom: 0.4rem;
 }
 
 .__type span {
-    background-color: #feefe3;
+    background-color: #5a5a5a72;
     padding: 5px 10px 7px;
     border-radius: 5px;
     display: inline-block;
     margin-right: 10px;
     font-size: 12px;
-    color: #fc9d52;
+    color: #a8ff62;
     font-weight: bold;
     line-height: 100%;
 }
@@ -181,5 +183,11 @@ img {
     display: inline-block;
     vertical-align: middle;
     margin-left: 2px;
+}
+
+.btn {
+    background-color: #000000;
+    border-color: #a2ff64;
+    margin-top: 0.25rem;
 }
 </style>

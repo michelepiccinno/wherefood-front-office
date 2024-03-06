@@ -70,9 +70,12 @@ export default {
         <div>
             <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
             <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
-            <button class="header-btn" @click="toggleCart">
+            <button class="header-btn cart-btn" @click="toggleCart">
                 <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
-                <span class="StyleCount" v-if="store.cartItems.length > 0">({{ totalCartItems }})</span>
+                <div class="cart-icon">
+                    <p class="StyleCount" v-if="store.cartItems.length > 0">{{ totalCartItems }}</p>
+
+                </div>
             </button>
             <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 500px;" :class="{ 'show': isCartOpen }"
                 id="cartOffcanvas" tabindex="-1">
@@ -98,6 +101,33 @@ export default {
 
 
 <style scoped lang="scss">
+.cart-btn {
+    position: relative;
+}
+
+.cart-icon {
+    position: absolute;
+    top: -7px;
+    right: -10px;
+    width: 15px;
+    height: 15px;
+    background-color: rgb(217, 0, 0);
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    text-align: center;
+
+    p {
+        font-size: 10px;
+        margin: 0 !important;
+        line-height: 9px;
+
+    }
+}
+
+
+
+
 .remove-button {
     background-color: transparent;
     color: #333;
@@ -263,7 +293,7 @@ img {
     background: #64646421;
     margin: 0 0.25rem;
     color: color(#575756 a(0.8));
-    width: 165px;
+
 
 
     span {
@@ -282,6 +312,26 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+    .cart-icon {
+
+        top: -2px;
+
+        width: 15px;
+        height: 15px;
+        background-color: rgb(217, 0, 0);
+        color: white;
+        border-radius: 50%;
+        padding: 5px;
+        text-align: center;
+
+        p {
+            font-size: 10px;
+            margin: 0 !important;
+            line-height: 9px;
+
+        }
+    }
+
     .nav {
         height: 50px !important;
 
@@ -296,6 +346,26 @@ img {
 }
 
 @media screen and (max-width : 1200px) {
+    .cart-icon {
+
+        top: -2px;
+
+        width: 15px;
+        height: 15px;
+        background-color: rgb(217, 0, 0);
+        color: white;
+        border-radius: 50%;
+        padding: 5px;
+        text-align: center;
+
+        p {
+            font-size: 10px;
+            margin: 0 !important;
+            line-height: 9px;
+
+        }
+    }
+
     .nav {
         height: 60px;
 

@@ -115,7 +115,8 @@ button {
 
 .wrapper {
     background-color: rgba(0, 0, 0, 0);
-    margin: 0 auto 2rem 0;
+    margin: 0 auto;
+    margin-bottom: 2rem;
     min-height: 30vh;
     display: flex;
     scroll-behavior: smooth;
@@ -199,7 +200,6 @@ button {
 
     width: 90%;
     overflow: auto;
-    height: 120px;
 
 }
 

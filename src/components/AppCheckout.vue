@@ -42,7 +42,6 @@ export default {
               <table class="table table-stripied">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Nome prodotto</th>
                     <th scope="col">Prezzo</th>
                     <th scope="col">Quantità</th>
@@ -50,9 +49,6 @@ export default {
                 </thead>
                 <tbody>
                   <tr v-for="(item, index) in this.store.cartItems">
-                    <td>
-                      {{ item.id }}
-                    </td>
                     <td>
                       {{ item.name }}
                     </td>

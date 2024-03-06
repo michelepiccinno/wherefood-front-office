@@ -1,6 +1,7 @@
+
 <script>
 import { store } from "../store.js";
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "AppRestaurantCard",
@@ -79,6 +80,7 @@ export default {
     </div>
   </section>
 </template>
+
 
 
 <style scoped lang="scss">

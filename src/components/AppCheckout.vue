@@ -34,6 +34,45 @@ export default {
   <div class="container">
     <div class="row">
       <div class="col-8">
+        <h1>Riepilogo ordine</h1>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-12 mt-2">
+              <table class="table table-stripied">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome prodotto</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col">Quantità</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(item, index) in this.store.cartItems">
+                    <td>
+                      {{ item.id }}
+                    </td>
+                    <td>
+                      {{ item.name }}
+                    </td>
+                    <td>
+                      {{ item.price }}
+                    </td>
+                    <td>
+                      {{ item.quantity }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" row">
+      <div class="col-8">
         <form @submit.prevent="submitOrder" method="POST">
 
           <div class="mb-3">

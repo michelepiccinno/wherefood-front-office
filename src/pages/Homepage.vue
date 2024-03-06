@@ -35,30 +35,30 @@ export default {
         }
     },
     methods: {
-        filterRestaurants() {
-            console.log("Filtraggio dei ristoranti alla selezione di una categoria");
+        // filterRestaurants() {
+        //     console.log("Filtraggio dei ristoranti alla selezione di una categoria");
 
-            const filteredRestaurants = [];
+        //     const filteredRestaurants = [];
 
-            for (const restaurant of this.store.restaurantsArray) {
-                let shouldInclude = true;
+        //     for (const restaurant of this.store.restaurantsArray) {
+        //         let shouldInclude = true;
 
-                for (const selectedCategory of this.store.selectedCategories) {
-                    if (!restaurant.categories.find(category => category.id === selectedCategory)) {
-                        shouldInclude = false;
-                        break;
-                    }
-                }
+        //         for (const selectedCategory of this.store.selectedCategories) {
+        //             if (!restaurant.categories.find(category => category.id === selectedCategory)) {
+        //                 shouldInclude = false;
+        //                 break;
+        //             }
+        //         }
 
-                // Se shouldInclude è ancora true, significa che il ristorante ha tutte le categorie selezionate
-                if (shouldInclude) {
-                    filteredRestaurants.push(restaurant);
-                }
-            }
-            this.store.filteredRestaurants = filteredRestaurants;
+        //         // Se shouldInclude è ancora true, significa che il ristorante ha tutte le categorie selezionate
+        //         if (shouldInclude) {
+        //             filteredRestaurants.push(restaurant);
+        //         }
+        //     }
+        //     this.store.filteredRestaurants = filteredRestaurants;
 
-            console.log("Ristoranti filtrati:", this.store.filteredRestaurants);
-        }
+        //     console.log("Ristoranti filtrati:", this.store.filteredRestaurants);
+        // }
     },
     setup() {
         return {
@@ -68,7 +68,18 @@ export default {
     computed: {
         restaurantsToShow: function () {
             return this.store.filteredRestaurants.length > 0 ? this.store.filteredRestaurants : this.store.restaurantsArray;
-        }
+        },
+        filterRestaurants() {
+            return this.store.restaurantsArray.filter(restaurant => {
+                if (this.store.selectedCategories.length === 0) {
+                    return true;
+                } else {
+                    return this.store.selectedCategories.every(selectedCategoryId =>
+                        restaurant.categories.some(category => category.id === selectedCategoryId)
+                    );
+                }
+            })
+        },
     }
 }
 
@@ -110,9 +121,9 @@ export default {
     <section>
         <h1 class="text-center">Ristoranti</h1>
         <div class="wrapper d-flex align-items-center justify-content-center flex-wrap">
-            <AppRestaurantCard v-for="(restaurant, index) in restaurantsToShow" :restaurant="restaurant" />
-            <div v-if="!filterRestaurants.length">
-                Non ci sono ristoranti.
+            <AppRestaurantCard v-for="restaurant in filterRestaurants" :restaurant="restaurant" />
+            <div class="p-3" v-if="!filterRestaurants.length">
+                Non ci sono ristoranti che rispettano le categorie selezionate.
             </div>
         </div>
     </section>

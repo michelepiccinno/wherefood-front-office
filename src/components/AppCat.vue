@@ -4,12 +4,6 @@ import { store } from "../store.js";
 
 export default {
     name: "AppCat",
-    props: {
-        filterRestaurant: {
-            type: Function,
-            required: true
-        },
-    },
     data() {
         return {
             store,
@@ -26,7 +20,6 @@ export default {
             } else {
                 this.store.selectedCategories.push(category.id);
             }
-            this.filterRestaurant();
         },
         isCategorySelected(category) {
             return this.store.selectedCategories.includes(category.id);

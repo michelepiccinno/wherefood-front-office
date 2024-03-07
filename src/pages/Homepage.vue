@@ -66,9 +66,6 @@ export default {
         };
     },
     computed: {
-        restaurantsToShow: function () {
-            return this.store.filteredRestaurants.length > 0 ? this.store.filteredRestaurants : this.store.restaurantsArray;
-        },
         filterRestaurants() {
             return this.store.restaurantsArray.filter(restaurant => {
                 if (this.store.selectedCategories.length === 0) {

@@ -154,11 +154,6 @@ p {
         height: 400px;
     }
 
-    .wrapper {
-        height: 300px;
-        padding-bottom: 1rem;
-    }
-
     .f-wrapper {
         height: 290px;
         padding-bottom: 2rem;

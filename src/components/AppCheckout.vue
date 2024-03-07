@@ -30,6 +30,14 @@ export default {
       } catch (error) {
         console.error(error);
       }
+      this.$router.push({ name: 'statusorder' })
+      this.emptyCart();
+    },
+    emptyCart() {
+      if (this.store.cartItems.length > 1) {
+        this.store.cartItems = [];
+        localStorage.clear();
+      }
     },
     calculateTotal() {
       let total = 0;
@@ -111,13 +119,10 @@ export default {
 
 
           <AppCreditCard />
-          <router-link :to="{ name: 'statusorder' }">
+          <button type="submit" class="btn btn-primary">
+            INVIA
+          </button>
 
-            <button type="submit" class="btn btn-primary">
-              INVIA
-            </button>
-
-          </router-link>
         </form>
       </div>
     </div>

@@ -12,12 +12,6 @@ export default {
         }
     },
     methods: {
-        emptyCart() {
-            if (this.store.cartItems.length > 1) {
-                this.store.cartItems = [];
-                localStorage.clear();
-            }
-        },
     },
 }
 </script>

@@ -42,9 +42,9 @@ export default {
 #motorino {
     position: relative;
     overflow: hidden;
-    width: 300px;
+    width: 100%;
     /* Modifica la larghezza in base alle dimensioni della tua GIF */
-    height: 200px;
+    height: 500px;
     /* Imposta un'altezza appropriata */
 }
 

@@ -38,7 +38,7 @@ export default {
 <template>
     <div class="__area text-center">
         <a href="#" class="__card">
-            <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
+            <!-- <button class="__favorit"><i class="fa-regular fa-heart"></i></button> -->
             <div class="img-wrap">
                 <img :src="getFullImagePath(restaurant.image)" class="img-fluid __img" />
 

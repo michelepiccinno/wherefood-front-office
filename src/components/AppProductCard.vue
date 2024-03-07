@@ -16,6 +16,9 @@ export default {
         this.findProducts();
     },
     methods: {
+        getFullImagePath(imagePath) {
+            return 'http://127.0.0.1:8000/storage/' + imagePath;
+        },
         findProducts() {
             axios.get(`http://127.0.0.1:8000/api/restaurants/${this.restaurantId}/products`)
                 .then(response => {
@@ -48,8 +51,7 @@ export default {
             <div v-for="product in store.productsArray" :key="product.id" class="card-measure">
                 <div class="__area text-center">
                     <a href="#" class="__card">
-                        <button class="__favorit"><i class="fa-regular fa-heart"></i></button>
-                        <img :src="product.image" class="img-fluid __img" />
+                        <img :src="getFullImagePath(product.image)" class="img-fluid __img" />
                         <div class="__card_detail text-left">
                             <h4>{{ product.name }}</h4>
                             <p>{{ product.ingredients }}</p>

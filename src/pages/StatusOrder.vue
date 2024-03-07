@@ -17,14 +17,54 @@ export default {
 </script>
 
 <template>
-    <h1>Ordine completato correttamente</h1>
-    <router-link :to="{ name: 'home' }">
-        <button @click="emptyCart()" type="submit" class="btn btn-primary">
-            Torna alla homepage
-        </button>
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex flex-column align-items-center py-5">
 
-    </router-link>
+                <h1>Grazie per il tuo ordine</h1>
+                <p>Il nostro rider sta arrivando da te.</p>
+                <div id="motorino">
+                    <img src="giphy.gif" alt="Motorino">
+                </div>
+                <router-link :to="{ name: 'home' }">
+                    <button class="btn btn-primary">
+                        Torna alla homepage
+                    </button>
+                </router-link>
+
+            </div>
+        </div>
+    </div>
 </template>
 
-<script scoped lang="scss">
-</script>
+
+<style scoped lang="scss">
+#motorino {
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+    /* Modifica la larghezza in base alle dimensioni della tua GIF */
+    height: 200px;
+    /* Imposta un'altezza appropriata */
+}
+
+#motorino img {
+    position: absolute;
+    left: -100%;
+    /* Inizia fuori dallo schermo a sinistra */
+    animation: motorinoMovimento 5s linear infinite;
+    /* Modifica la durata e la velocità secondo necessità */
+}
+
+@keyframes motorinoMovimento {
+    0% {
+        left: -100%;
+        /* Inizia fuori dallo schermo a sinistra */
+    }
+
+    100% {
+        left: 100%;
+        /* Finisce fuori dallo schermo a destra */
+    }
+}
+</style>

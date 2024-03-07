@@ -11,6 +11,8 @@ import '../styles/general.scss';
 import { Navigation, Autoplay, Scrollbar, A11y } from 'swiper/modules';
 import AppRestaurantCard from "../components/AppRestaurantCard.vue";
 
+
+
 export default {
     name: "Homepage",
     props: {
@@ -28,10 +30,10 @@ export default {
     data() {
         return {
             store,
-            searchRestaurant: '',
+
+
         }
     },
-
     methods: {
         // filterRestaurants() {
         //     console.log("Filtraggio dei ristoranti alla selezione di una categoria");
@@ -58,16 +60,6 @@ export default {
         //     console.log("Ristoranti filtrati:", this.store.filteredRestaurants);
         // }
     },
-
-    watch: {
-        searchRestaurant(newValue, oldValue) {
-            this.filterRestaurants(); // Chiamata alla funzione di filtro quando cambia la ricerca
-        },
-        'store.selectedCategories': function (newVal, oldVal) {
-            this.filterRestaurants(); // Chiamata alla funzione di filtro quando cambiano le categorie selezionate
-        }
-    },
-
     setup() {
         return {
             modules: [Autoplay, Navigation],
@@ -95,20 +87,25 @@ export default {
 
 <template>
     <section class="jumbo-section">
+
         <div class="middle-cont">
+
             <img src="Where.png" alt="">
             <p class="playfair-display"> &ldquo;I piatti dei ristoranti che ami e la spesa, a domicilio&rdquo;
             </p>
         </div>
+
         <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
             delay: 2500,
             disableOnInteraction: false,
         }" :pagination="{
-            clickable: false,
-        }" :navigation="false" :modules="modules" class="mySwiper">
+    clickable: false,
+}" :navigation="false" :modules="modules" class="mySwiper">
+
             <swiper-slide class="opacity burger-bg"></swiper-slide>
             <swiper-slide class="opacity pizza-bg"></swiper-slide>
             <swiper-slide class="opacity jap-bg"></swiper-slide>
+
         </swiper>
 
     </section>
@@ -120,10 +117,6 @@ export default {
     <section>
         <h1 class="text-center">Seleziona una categoria</h1>
         <AppCat :filterRestaurant="filterRestaurants" />
-        <div class="search__container d-flex justify-content-center mb-3">
-            <input v-model="searchRestaurant" class="search__input" id="custom_input_style" type="text"
-                placeholder="Filtra per nome ristorante">
-        </div>
     </section>
     <section>
         <h1 class="text-center">Ristoranti</h1>
@@ -169,15 +162,6 @@ section {
 
     }
 }
-
-#custom_input_style{
-    background-color: #050505!important;
-    color: #26ff56!important;
-    border-color: #26ff56!important;
-     outline: 0px none #fff !important;
-     border-radius: 10px!important;
-}
-
 
 .opacity {
     opacity: 0.3;

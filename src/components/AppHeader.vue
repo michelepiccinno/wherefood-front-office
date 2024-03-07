@@ -49,6 +49,12 @@ export default {
         localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
       }
     },
+    emptyCart() {
+      if (this.store.cartItems.length > 1) {
+        this.store.cartItems = [];
+        localStorage.clear();
+      }
+    },
   },
   computed: {
     totalCartItems() {
@@ -125,6 +131,7 @@ export default {
                   <router-link :to="{ name: 'checkout' }">
                     <button class="ProdottoStyle" @click="">CHECKOUT</button>
                   </router-link>
+                  <button class="ProdottoStyle" @click="emptyCart()">SVUOTA CARRELLO</button>
                 </div>
               </div>
             </div>

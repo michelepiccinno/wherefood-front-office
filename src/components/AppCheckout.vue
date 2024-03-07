@@ -2,8 +2,13 @@
 import { store } from "../store.js";
 import axios from 'axios';
 
+import AppCreditCard from "./AppCreditCard.vue";
+
 export default {
   name: "AppCheckout",
+  components: {
+    AppCreditCard
+  },
   data() {
     return {
       store,
@@ -31,6 +36,7 @@ export default {
       this.store.cartItems.forEach(item => {
         total += item.price * item.quantity;
       });
+      this.total_order = total;
       return total;
     }
   }
@@ -73,7 +79,6 @@ export default {
                   </tr>
                 </tbody>
               </table>
-
             </div>
           </div>
         </div>
@@ -104,15 +109,12 @@ export default {
             <input v-model="orderData.customer_number" type="text" class="form-control" id="customer_number">
           </div>
 
-          <div class="mb-3">
-            <label for="credit_card" class="form-label">Carta di credito</label>
-            <input type="text" class="form-control" id="customer_number">
-          </div>
+
+          <AppCreditCard />
 
           <button type="submit" class="btn btn-primary">
             INVIA
           </button>
-
           <div class="modal fade text-dark" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">

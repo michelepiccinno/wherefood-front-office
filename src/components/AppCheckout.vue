@@ -19,12 +19,21 @@ export default {
         customer_number: '',
         total_order: '',
         state_payment: 1,
+        products: [],
       },
     }
   },
   methods: {
     async submitOrder() {
       try {
+
+        const productsData = this.store.cartItems.map(item => {
+          return { id: item.id, quantity: item.quantity };
+        });
+
+
+        this.orderData.products = productsData;
+
         const response = await axios.post(this.store.apiUrl + this.store.apiOrders, this.orderData);
         console.log(response.data);
       } catch (error) {
@@ -34,7 +43,7 @@ export default {
       this.emptyCart();
     },
     emptyCart() {
-      if (this.store.cartItems.length > 1) {
+      if (this.store.cartItems.length > 0) {
         this.store.cartItems = [];
         localStorage.clear();
       }

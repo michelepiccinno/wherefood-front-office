@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Homepage from './pages/Homepage.vue';
 import AppCheckout from './components/AppCheckout.vue';
 import AppProductCard from './components/AppProductCard.vue';
+import StatusOrder from './pages/StatusOrder.vue';
 // import EventDetail from './pages/EventDetail.vue'
 
 const router = createRouter({
@@ -22,6 +23,11 @@ const router = createRouter({
             path: '/checkout',
             name: 'checkout',
             component: AppCheckout
+        },
+        {
+            path: '/statusorder',
+            name: 'statusorder',
+            component: StatusOrder
         },
     ]
 });

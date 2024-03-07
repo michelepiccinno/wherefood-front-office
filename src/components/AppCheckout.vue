@@ -17,7 +17,7 @@ export default {
         customer_surname: '',
         customer_address: '',
         customer_number: '',
-        total_order: '100',
+        total_order: '',
         state_payment: 1,
       },
     }
@@ -36,7 +36,7 @@ export default {
       this.store.cartItems.forEach(item => {
         total += item.price * item.quantity;
       });
-      this.total_order = total;
+      this.orderData.total_order = total;
       return total;
     }
   }
@@ -111,25 +111,13 @@ export default {
 
 
           <AppCreditCard />
+          <router-link :to="{ name: 'statusorder' }">
 
-          <button type="submit" class="btn btn-primary">
-            INVIA
-          </button>
-          <div class="modal fade text-dark" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="staticBackdropLabel">ORDINE INVIATO</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">chiudi</button>
-                  <!--   <button type="button" class="btn btn-primary">Invia</button> -->
-                </div>
-              </div>
-            </div>
-          </div>
+            <button type="submit" class="btn btn-primary">
+              INVIA
+            </button>
+
+          </router-link>
         </form>
       </div>
     </div>

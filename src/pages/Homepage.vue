@@ -100,7 +100,7 @@ export default {
         <h1 class="text-center">Seleziona una categoria</h1>
         <AppCat :filterRestaurant="filterRestaurants" />
         <div class="search__container d-flex justify-content-center mb-3">
-            <input v-model="searchRestaurant" class="search__input bg-secondary-subtle" type="text"
+            <input v-model="searchRestaurant" class="search__input" id="custom_input_style" type="text"
                 placeholder="Filtra per nome ristorante">
         </div>
     </section>
@@ -153,9 +153,14 @@ section {
     }
 }
 
-.search_input{
-    border: 2px solid #26ff56;
+#custom_input_style{
+    background-color: #050505!important;
+    color: #26ff56!important;
+    border-color: #26ff56!important;
+     outline: 0px none #fff !important;
+     border-radius: 10px!important;
 }
+
 
 .opacity {
     opacity: 0.3;

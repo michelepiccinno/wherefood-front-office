@@ -50,7 +50,7 @@ export default {
       }
     },
     emptyCart() {
-      if (this.store.cartItems.length > 1) {
+      if (this.store.cartItems.length > 0) {
         this.store.cartItems = [];
         localStorage.clear();
       }

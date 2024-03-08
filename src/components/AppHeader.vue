@@ -72,17 +72,18 @@ export default {
     <router-link :to="{ name: 'home' }">
       <img src="WHEREFOOD.png" alt="">
     </router-link>
-    <div>
-      <a class="header-btn-login" href="http://127.0.0.1:8000/"><i class="fa-solid fa-right-to-bracket"><span>Login</span></i></a>
+    <div class="d-flex align-items-center icon-not">
+      <a class="header-btn" href="http://127.0.0.1:8000/"><i class="fa-solid fa-right-to-bracket"></i></a>
       <button class="header-btn cart-btn" @click="toggleCart">
         <i class="fa-solid fa-cart-shopping"></i>
         
       </button>
-      <span class="head-w">Carrello</span>
-      <span class="cart-icon" v-show="store.cartItems.length > 0">
-          <p class="StyleCount">{{ totalCartItems }}</p>
+      <p v-show="store.cartItems.length > 0" class="StyleCount">{{ totalCartItems }}</p>
+      
+      
+          
 
-        </span>
+        
       
       <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 600px;" :class="{ 'show': isCartOpen }"
         id="cartOffcanvas" tabindex="-1">
@@ -149,27 +150,15 @@ export default {
 
 
 <style scoped lang="scss">
-.cart-icon {
-  
-  top: 18px;
-  right: 45px !important;
-  width: 20px;
-  height: 20px;
-  background-color: rgb(217, 0, 0);
-  color: white;
+
+.icon-not p{
+  background-color: rgb(211, 0, 0);
   border-radius: 50%;
-  padding: 5px;
-  text-align: center;
-  margin-left: 3px;
-
-  p {
-    font-size: 12px;
-    margin: 0 !important;
-    line-height: 10px;
-    font-weight: 800;
-
-  }
+  padding: 2px 7px;
+  font-size: 10px;
 }
+
+
 .head-w{
   color: #333;
 }
@@ -483,20 +472,7 @@ img {
     padding-left: 0.5rem
   }
 }
-.header-btn-login{
 
-border-radius: 10px;
-  border-style: none;
-  background: #64646421;
-  margin: 0 0.25rem;
-  color: color(#575756 a(0.8));
-  padding: 7px 4px 7px 4px;
-  outline: none !important;
-
-  span {
-    padding-left: 0.5rem
-  }
-}
 a {
     color: rgb(22 21 21);
     text-decoration: underline;
@@ -525,9 +501,7 @@ a {
 }
 
 @media screen and (max-width: 768px) {
-  .offcanvas-body{
-    width: 100%;
-  }
+  
   .cart-icon {
     
     top: 5px;

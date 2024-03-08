@@ -73,8 +73,7 @@ export default {
       <img src="WHEREFOOD.png" alt="">
     </router-link>
     <div>
-      <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
-      <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
+      <a class="header-btn-login" href="http://127.0.0.1:8000/"><i class="fa-solid fa-right-to-bracket"><span>Login</span></i></a>
       <button class="header-btn cart-btn" @click="toggleCart">
         <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
         <div class="cart-icon">
@@ -463,12 +462,29 @@ img {
   background: #64646421;
   margin: 0 0.25rem;
   color: color(#575756 a(0.8));
-
-
+  
 
   span {
     padding-left: 0.5rem
   }
+}
+.header-btn-login{
+
+border-radius: 10px;
+  border-style: none;
+  background: #64646421;
+  margin: 0 0.25rem;
+  color: color(#575756 a(0.8));
+  padding: 7px 4px 7px 4px;
+  outline: none !important;
+
+  span {
+    padding-left: 0.5rem
+  }
+}
+a {
+    color: rgb(22 21 21);
+    text-decoration: underline;
 }
 
 .header-btn:hover {
@@ -476,6 +492,18 @@ img {
   transition: all 0.5s ease-in-out;
   border: 1px solid #646464;
 
+  span {
+    color: #646464;
+  }
+}
+
+.header-btn-login:hover{
+
+  border-style: none !important;
+  background: none;
+  transition: all 0.5s ease-in-out !important;
+  border: 1px solid #646464 !important;
+  outline: none !important; 
   span {
     color: #646464;
   }

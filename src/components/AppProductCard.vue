@@ -29,8 +29,13 @@ export default {
                 });
         },
         addToCart(product) {
-            this.store.cartItems.push({ ...product, quantity: 1 });
-            this.addedToCartMap[product.id] = true;
+            if (this.store.cartItems.length > 0 && product.restaurant_id !== this.store.cartItems[0]?.restaurant_id) {
+                console.log("ristorante diverso");
+                return;
+            } else {
+                this.store.cartItems.push({ ...product, quantity: 1 });
+                this.addedToCartMap[product.id] = true;
+            }
             localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
         },
         removeFromCart(product) {
@@ -47,6 +52,14 @@ export default {
 
 <template>
     <section class="cont">
+
+        <div v-if="showAlert" class="alert alert-danger" role="alert">
+            Non è possibile aggiungere prodotti da ristoranti diversi.
+            <button @click="closeAlert" type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         <div class="d-flex align-items-center flex-wrap wrap">
             <div v-for="product in store.productsArray" :key="product.id" class="card-measure">
                 <div class="__area text-center">

@@ -153,7 +153,7 @@ export default {
 
 <style scoped lang="scss">
 .cart-icon {
-  display: inline-block !important;
+  
   top: 18px;
   right: 45px !important;
   width: 20px;
@@ -535,7 +535,7 @@ img {
 
 @media screen and (min-width : 1200px) {
   .cart-icon {
-    display: inline-block !important;
+    
     top: 5px;
     right: 57px !important;
     width: 15px;

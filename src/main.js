@@ -1,5 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
+
 
 // importo bootstrap (js)
 import * as bootstrap from 'bootstrap'
@@ -23,6 +26,7 @@ import { router } from './router';
 window.vue = {};
 window.vue.App = createApp(App)
     .use(router)
+    .use(Toast)
     .component('font-awesome-icon', FontAwesomeIcon)
     .mount('#app');
 

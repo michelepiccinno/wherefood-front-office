@@ -2,10 +2,15 @@
 <script>
 import { store } from "../store.js";
 import axios from "axios";
+import { useToast } from "vue-toastification";
 
 export default {
     name: "AppRestaurantCard",
     props: ['restaurantId'],
+    setup() {
+        const toast = useToast();
+        return { toast }
+    },
     data() {
         return {
             store,
@@ -16,6 +21,22 @@ export default {
         this.findProducts();
     },
     methods: {
+        triggerToast() {
+            this.toast.warning("Non è possibile aggiungere prodotti da ristoranti diversi!", {
+                position: "top-right",
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: "button",
+                icon: true,
+                rtl: false
+            });
+        },
         getFullImagePath(imagePath) {
             return 'http://127.0.0.1:8000/storage/' + imagePath;
         },
@@ -31,6 +52,7 @@ export default {
         addToCart(product) {
             if (this.store.cartItems.length > 0 && product.restaurant_id !== this.store.cartItems[0]?.restaurant_id) {
                 console.log("ristorante diverso");
+                this.triggerToast();
                 return;
             } else {
                 this.store.cartItems.push({ ...product, quantity: 1 });
@@ -52,14 +74,6 @@ export default {
 
 <template>
     <section class="cont">
-
-        <div v-if="showAlert" class="alert alert-danger" role="alert">
-            Non è possibile aggiungere prodotti da ristoranti diversi.
-            <button @click="closeAlert" type="button" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
         <div class="d-flex align-items-center flex-wrap wrap">
             <div v-for="product in store.productsArray" :key="product.id" class="card-measure">
                 <div class="__area text-center">

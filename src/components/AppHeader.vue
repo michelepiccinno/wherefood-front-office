@@ -73,15 +73,20 @@ export default {
       <img src="WHEREFOOD.png" alt="">
     </router-link>
     <div>
-      <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
-      <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
+      <button class="header-btn"><i class="fa-regular fa-user"></i></button>
+      <span class="head-w">Account</span>
+      <button class="header-btn"><i class="fa-solid fa-right-to-bracket"></i></button>
+      <span class="head-w">Log in</span>
       <button class="header-btn cart-btn" @click="toggleCart">
-        <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
-        <div class="cart-icon">
-          <p class="StyleCount" v-if="store.cartItems.length > 0">{{ totalCartItems }}</p>
-
-        </div>
+        <i class="fa-solid fa-cart-shopping"></i>
+        
       </button>
+      <span class="head-w">Carrello</span>
+      <span class="cart-icon" v-show="store.cartItems.length > 0">
+          <p class="StyleCount">{{ totalCartItems }}</p>
+
+        </span>
+      
       <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 600px;" :class="{ 'show': isCartOpen }"
         id="cartOffcanvas" tabindex="-1">
         <div class="offcanvas-header">
@@ -148,9 +153,9 @@ export default {
 
 <style scoped lang="scss">
 .cart-icon {
-  position: absolute;
+  display: inline-block !important;
   top: 18px;
-  right: 70px;
+  right: 45px !important;
   width: 20px;
   height: 20px;
   background-color: rgb(217, 0, 0);
@@ -158,6 +163,7 @@ export default {
   border-radius: 50%;
   padding: 5px;
   text-align: center;
+  margin-left: 3px;
 
   p {
     font-size: 12px;
@@ -167,6 +173,14 @@ export default {
 
   }
 }
+.head-w{
+  color: #333;
+}
+.header-btn:hover + .head-w {
+  color: #53fc5b;
+  transition: all 0.5s ease-in-out;
+}
+
 
 .ProdottoStyle {
   margin: 0px 5px 10px 20px;
@@ -341,8 +355,11 @@ export default {
   i:hover {
     color: #53fc5b;
     transition: all 0.3s ease-in-out;
+    
   }
-
+  i:hover > span{
+    color: white;
+  }
 }
 
 img {
@@ -483,9 +500,9 @@ img {
 
 @media screen and (max-width: 768px) {
   .cart-icon {
-
+    display: inline-block !important;
     top: 5px;
-
+    right: 23px !important;
     width: 15px;
     height: 15px;
     background-color: rgb(217, 0, 0);
@@ -510,17 +527,17 @@ img {
       height: 20px !important;
     }
 
-    span {
+    .head-w {
       display: none !important;
     }
   }
 }
 
-@media screen and (max-width : 1200px) {
+@media screen and (min-width : 1200px) {
   .cart-icon {
-
-    top: -2px;
-
+    display: inline-block !important;
+    top: 5px;
+    right: 57px !important;
     width: 15px;
     height: 15px;
     background-color: rgb(217, 0, 0);
@@ -545,7 +562,7 @@ img {
     }
 
     span {
-      display: none;
+      display: inline-block;
     }
   }
 }

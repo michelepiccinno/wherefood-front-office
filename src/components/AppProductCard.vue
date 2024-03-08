@@ -47,7 +47,7 @@ export default {
 
 <template>
     <section class="cont">
-        <div class="d-flex align-items-center flex-wrap wrap">
+        <div class="d-flex align-items-baseline flex-wrap wrap">
             <div v-for="product in store.productsArray" :key="product.id" class="card-measure">
                 <div class="__area text-center">
                     <a href="#" class="__card">
@@ -77,16 +77,21 @@ export default {
 
 
 <style scoped lang="scss">
+.btn {
+    background-color: #000000;
+    border-color: #a2ff64;
+    margin-top: 0.25rem;
+}
 .cont {
     padding: 1rem;
 
     background-size: contain;
-    height: calc(100vh - 80px);
+    height: 100%
 
 }
 
 .card-measure {
-    width: calc(100% / 4);
+    width: calc(100% / 2);
 
 }
 
@@ -104,7 +109,7 @@ export default {
 }
 
 .__card {
-    max-width: 350px;
+    max-width: 450px;
 
     cursor: pointer;
     position: relative;
@@ -150,11 +155,11 @@ export default {
     margin: -30px 10px 0;
     position: relative;
     z-index: 2;
-    background-color: #fff;
+    background-color: #000000;
 }
 
 .__card_detail h4 {
-    color: #474340;
+    color: #888888;
     line-height: 100%;
     font-weight: bold;
 }
@@ -196,5 +201,38 @@ export default {
     display: inline-block;
     vertical-align: middle;
     margin-left: 2px;
+}
+@media screen and (max-width : 768px){
+    .cont {
+    padding: 0.25rem;
+        height: 100%;
+    background-size: contain;
+    
+
+}
+    .card-measure{
+        width: calc(100% / 1);
+    }
+    .__card_detail h4 {
+    color: #474340;
+    line-height: 100%;
+    font-weight: bold;
+}
+
+.__card_detail p {
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+}
+
+}
+@media screen and (min-width : 1200px){
+    .cont{
+        width: 100%;
+    }
+    .card-measure{
+        width: calc(100% / 3);
+    }
+   
 }
 </style>

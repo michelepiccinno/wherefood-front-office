@@ -499,8 +499,11 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+  .offcanvas-body{
+    width: 100%;
+  }
   .cart-icon {
-    display: inline-block !important;
+    
     top: 5px;
     right: 23px !important;
     width: 15px;
@@ -555,7 +558,7 @@ img {
   }
 
   .nav {
-    height: 60px;
+    height: 80px;
 
     img {
       height: 50px;

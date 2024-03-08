@@ -39,12 +39,15 @@ export default {
 
 
 <style scoped lang="scss">
+.row{
+    height: calc(100vh - 80px);
+}
 #motorino {
     position: relative;
     overflow: hidden;
     width: 100%;
     /* Modifica la larghezza in base alle dimensioni della tua GIF */
-    height: 500px;
+    height: 400px;
     /* Imposta un'altezza appropriata */
 }
 
@@ -65,6 +68,19 @@ export default {
     100% {
         left: 100%;
         /* Finisce fuori dallo schermo a destra */
+    }
+}
+img{
+    height: 400px;
+}
+@media screen and (max-width: 768px){
+    .row{
+        height: calc(100vh - 50px);
+    }
+}
+@media screen and (min-width : 1200px){
+    .row{
+        height: calc(100vh - 80px);
     }
 }
 </style>

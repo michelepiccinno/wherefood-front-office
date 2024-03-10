@@ -34,41 +34,13 @@ export default {
 
         }
     },
-    methods: {
-        // filterRestaurants() {
-        //     console.log("Filtraggio dei ristoranti alla selezione di una categoria");
-
-        //     const filteredRestaurants = [];
-
-        //     for (const restaurant of this.store.restaurantsArray) {
-        //         let shouldInclude = true;
-
-        //         for (const selectedCategory of this.store.selectedCategories) {
-        //             if (!restaurant.categories.find(category => category.id === selectedCategory)) {
-        //                 shouldInclude = false;
-        //                 break;
-        //             }
-        //         }
-
-        //         // Se shouldInclude è ancora true, significa che il ristorante ha tutte le categorie selezionate
-        //         if (shouldInclude) {
-        //             filteredRestaurants.push(restaurant);
-        //         }
-        //     }
-        //     this.store.filteredRestaurants = filteredRestaurants;
-
-        //     console.log("Ristoranti filtrati:", this.store.filteredRestaurants);
-        // }
-    },
     setup() {
         return {
             modules: [Autoplay, Navigation],
         };
     },
     computed: {
-        restaurantsToShow: function () {
-            return this.store.filteredRestaurants.length > 0 ? this.store.filteredRestaurants : this.store.restaurantsArray;
-        },
+
         filterRestaurants() {
             return this.store.restaurantsArray.filter(restaurant => {
                 if (this.store.selectedCategories.length === 0) {

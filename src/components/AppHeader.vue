@@ -49,6 +49,12 @@ export default {
         localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
       }
     },
+    emptyCart() {
+      if (this.store.cartItems.length > 0) {
+        this.store.cartItems = [];
+        localStorage.clear();
+      }
+    },
   },
   computed: {
     totalCartItems() {
@@ -66,16 +72,19 @@ export default {
     <router-link :to="{ name: 'home' }">
       <img src="WHEREFOOD.png" alt="">
     </router-link>
-    <div>
-      <button class="header-btn"><i class="fa-regular fa-user"><span>Account</span></i></button>
-      <button class="header-btn"><i class="fa-solid fa-right-to-bracket"><span>Log in</span></i></button>
+    <div class="d-flex align-items-center icon-not">
+      <a class="header-btn" href="http://127.0.0.1:8000/"><i class="fa-solid fa-right-to-bracket"></i></a>
       <button class="header-btn cart-btn" @click="toggleCart">
-        <i class="fa-solid fa-cart-shopping"><span>Carrello</span></i>
-        <div class="cart-icon">
-          <p class="StyleCount" v-if="store.cartItems.length > 0">{{ totalCartItems }}</p>
-
-        </div>
+        <i class="fa-solid fa-cart-shopping"></i>
+        
       </button>
+      <p v-show="store.cartItems.length > 0" class="StyleCount">{{ totalCartItems }}</p>
+      
+      
+          
+
+        
+      
       <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 600px;" :class="{ 'show': isCartOpen }"
         id="cartOffcanvas" tabindex="-1">
         <div class="offcanvas-header">
@@ -125,6 +134,7 @@ export default {
                   <router-link :to="{ name: 'checkout' }">
                     <button class="ProdottoStyle" @click="">CHECKOUT</button>
                   </router-link>
+                  <button class="ProdottoStyle" @click="emptyCart()">SVUOTA CARRELLO</button>
                 </div>
               </div>
             </div>
@@ -140,26 +150,23 @@ export default {
 
 
 <style scoped lang="scss">
-.cart-icon {
-  position: absolute;
-  top: 18px;
-  right: 70px;
-  width: 20px;
-  height: 20px;
-  background-color: rgb(217, 0, 0);
-  color: white;
+
+.icon-not p{
+  background-color: rgb(211, 0, 0);
   border-radius: 50%;
-  padding: 5px;
-  text-align: center;
-
-  p {
-    font-size: 12px;
-    margin: 0 !important;
-    line-height: 10px;
-    font-weight: 800;
-
-  }
+  padding: 2px 7px;
+  font-size: 10px;
 }
+
+
+.head-w{
+  color: #333;
+}
+.header-btn:hover + .head-w {
+  color: #53fc5b;
+  transition: all 0.5s ease-in-out;
+}
+
 
 .ProdottoStyle {
   margin: 0px 5px 10px 20px;
@@ -334,8 +341,11 @@ export default {
   i:hover {
     color: #53fc5b;
     transition: all 0.3s ease-in-out;
+    
   }
-
+  i:hover > span{
+    color: white;
+  }
 }
 
 img {
@@ -456,12 +466,16 @@ img {
   background: #64646421;
   margin: 0 0.25rem;
   color: color(#575756 a(0.8));
-
-
+  
 
   span {
     padding-left: 0.5rem
   }
+}
+
+a {
+    color: rgb(22 21 21);
+    text-decoration: underline;
 }
 
 .header-btn:hover {
@@ -474,11 +488,24 @@ img {
   }
 }
 
+.header-btn-login:hover{
+
+  border-style: none !important;
+  background: none;
+  transition: all 0.5s ease-in-out !important;
+  border: 1px solid #646464 !important;
+  outline: none !important; 
+  span {
+    color: #646464;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  
   .cart-icon {
-
+    
     top: 5px;
-
+    right: 23px !important;
     width: 15px;
     height: 15px;
     background-color: rgb(217, 0, 0);
@@ -503,17 +530,17 @@ img {
       height: 20px !important;
     }
 
-    span {
+    .head-w {
       display: none !important;
     }
   }
 }
 
-@media screen and (max-width : 1200px) {
+@media screen and (min-width : 1200px) {
   .cart-icon {
-
-    top: -2px;
-
+    
+    top: 5px;
+    right: 57px !important;
     width: 15px;
     height: 15px;
     background-color: rgb(217, 0, 0);
@@ -531,14 +558,14 @@ img {
   }
 
   .nav {
-    height: 60px;
+    height: 80px;
 
     img {
       height: 50px;
     }
 
     span {
-      display: none;
+      display: inline-block;
     }
   }
 }

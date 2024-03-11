@@ -108,22 +108,22 @@ export default {
 
             <div class="mb-3">
               <label for="customer_name" class="form-label">Nome</label>
-              <input v-model="orderData.customer_name" type="text" class="form-control" id="customer_name">
+              <input v-model="orderData.customer_name" type="text" class="form-control" id="customer_name" required>
             </div>
 
             <div class="mb-3">
               <label for="customer_surname" class="form-label">Cognome</label>
-              <input v-model="orderData.customer_surname" type="text" class="form-control" id="customer_surname">
+              <input v-model="orderData.customer_surname" type="text" class="form-control" id="customer_surname" required>
             </div>
 
             <div class="mb-3">
               <label for="customer_address" class="form-label">Indirizzo del cliente</label>
-              <input v-model="orderData.customer_address" type="text" class="form-control" id="customer_address">
+              <input v-model="orderData.customer_address" type="text" class="form-control" id="customer_address" required>
             </div>
 
             <div class="mb-3">
               <label for="customer_number" class="form-label">Telefono del cliente</label>
-              <input v-model="orderData.customer_number" type="text" class="form-control" id="customer_number">
+              <input v-model="orderData.customer_number" type="text" class="form-control" id="customer_number" required>
             </div>
             <button type="submit" class="btn btn-primary">
               INVIA

@@ -1,4 +1,3 @@
-
 <script>
 import { store } from "../store.js";
 import axios from "axios";
@@ -22,9 +21,9 @@ export default {
     },
     methods: {
         triggerToast() {
-            this.toast.warning("Non è possibile aggiungere prodotti da ristoranti diversi!", {
+            this.toast.warning("Non è possibile aggiungere prodotti da ristoranti diversi! Svuota prima il carrello", {
                 position: "top-right",
-                timeout: 5000,
+                timeout: 10000,
                 closeOnClick: true,
                 pauseOnFocusLoss: true,
                 pauseOnHover: true,
@@ -50,13 +49,25 @@ export default {
                 });
         },
         addToCart(product) {
+
+            //controllo se il prodotto è gia presente nel carrello
+            let isProductInCart = false;
+            this.store.cartItems.forEach(element => {
+                if (element.id === product.id) {
+                    isProductInCart = true;
+                }
+            }); 
+            /* l */
+
             if (this.store.cartItems.length > 0 && product.restaurant_id !== this.store.cartItems[0]?.restaurant_id) {
                 console.log("ristorante diverso");
                 this.triggerToast();
                 return;
             } else {
-                this.store.cartItems.push({ ...product, quantity: 1 });
-                this.addedToCartMap[product.id] = true;
+                if (isProductInCart == false) {
+                    this.store.cartItems.push({ ...product, quantity: 1 });
+                    this.addedToCartMap[product.id] = true;
+                }
             }
             localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
         },
@@ -86,10 +97,10 @@ export default {
                             <p>Prezzo: {{ product.price }}€</p>
                             <div class="__detail d-flex flex-column">
                                 <button v-if="!addedToCartMap[product.id]" type="button" class="btn btn-primary"
-                                    @click="addToCart(product)">
+                                    @click="addToCart(product);">
                                     Aggiungi al carrello
                                 </button>
-                                <button v-else type="button" class="btn btn-danger" @click="removeFromCart(product)">
+                                <button v-else type="text" class="btn btn-danger" @click="removeFromCart(product)">
                                     Rimuovi dal carrello
                                 </button>
                             </div>
@@ -109,12 +120,12 @@ export default {
     border-color: #a2ff64;
     margin-top: 0.25rem;
 }
+
 .cont {
     padding: 1rem;
 
     background-size: contain;
     height: 100%
-
 }
 
 .card-measure {
@@ -229,37 +240,42 @@ export default {
     vertical-align: middle;
     margin-left: 2px;
 }
-@media screen and (max-width : 768px){
-    .cont {
-    padding: 0.25rem;
-        height: 100%;
-    background-size: contain;
-    
 
-}
-    .card-measure{
+@media screen and (max-width : 768px) {
+    .cont {
+        padding: 0.25rem;
+        height: 100%;
+        background-size: contain;
+
+
+    }
+
+    .card-measure {
         width: calc(100% / 1);
     }
+
     .__card_detail h4 {
-    color: #474340;
-    line-height: 100%;
-    font-weight: bold;
+        color: #474340;
+        line-height: 100%;
+        font-weight: bold;
+    }
+
+    .__card_detail p {
+        font-size: 10px;
+        font-weight: bold;
+        margin-bottom: 0.4rem;
+    }
+
 }
 
-.__card_detail p {
-    font-size: 10px;
-    font-weight: bold;
-    margin-bottom: 0.4rem;
-}
-
-}
-@media screen and (min-width : 1200px){
-    .cont{
+@media screen and (min-width : 1200px) {
+    .cont {
         width: 100%;
     }
-    .card-measure{
+
+    .card-measure {
         width: calc(100% / 3);
     }
-   
+
 }
 </style>

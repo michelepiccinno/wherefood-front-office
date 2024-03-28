@@ -13,7 +13,7 @@ export default {
     toggleCart() {
       this.isCartOpen = !this.isCartOpen;
     },
-    addToCart(product) {
+    /* addToCart(product) {
       const cartProduct = this.store.cartItems.find(item => item.id === product.id);
       if (cartProduct) {
         // Se il prodotto è già nel carrello, rimuovilo
@@ -24,20 +24,31 @@ export default {
         this.store.cartItems.push(product);
         product.isAdded = true;
       }
-
+h
       localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
-    },
-    removeFromCart(productId) {
-      const index = this.store.cartItems.findIndex(item => item.id === productId);
-      if (index !== -1) {
-        this.store.cartItems.splice(index, 1);
-        const product = this.store.products.find(product => product.id === productId);
-        if (product) {
-          product.isAdded = false;
-        }
-      }
-
+    }, */
+    removeFromCart(item) {
+      /*       console.log(item);
+            console.log(this.store.cartItems); */
+      const index = this.store.cartItems.findIndex(object => object.id === item.id);
+      /*      console.log(index); */
+      this.store.cartItems.splice(index, 1);
+      /*       console.log(this.store.cartItems); */
       localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+      /* 
+      const itemToDelete = this.store.cartItems.find((id) => id === item.id);
+   */
+
+      /*    const index = this.store.cartItems.findIndex(item => item.id === productId);
+         if (index !== -1) {
+           this.store.cartItems.splice(index, 1);
+           const product = this.store.products.find(product => product.id === productId);
+           if (product) {
+             product.isAdded = false;
+           }
+         }
+   
+         localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems)); */
     },
     incrementQuantity(index) {
       this.store.cartItems[index].quantity++;
@@ -76,15 +87,15 @@ export default {
       <a class="header-btn" href="http://127.0.0.1:8000/"><i class="fa-solid fa-right-to-bracket"></i></a>
       <button class="header-btn cart-btn" @click="toggleCart">
         <i class="fa-solid fa-cart-shopping"></i>
-        
+
       </button>
       <p v-show="store.cartItems.length > 0" class="StyleCount">{{ totalCartItems }}</p>
-      
-      
-          
 
-        
-      
+
+
+
+
+
       <div class="offcanvas offcanvas-end custom-offcanvas" style="width: 600px;" :class="{ 'show': isCartOpen }"
         id="cartOffcanvas" tabindex="-1">
         <div class="offcanvas-header">
@@ -125,6 +136,7 @@ export default {
                         </div>
                         <button class="increase-button m-2" @click="incrementQuantity(index)">+</button>
                         <button class="decrease-button m-2" @click="decrementQuantity(index)">-</button>
+                        <button class="decrease-button m-2" @click="removeFromCart(item)">X</button>
                       </div>
                     </div>
                   </li>
@@ -150,8 +162,7 @@ export default {
 
 
 <style scoped lang="scss">
-
-.icon-not p{
+.icon-not p {
   background-color: rgb(211, 0, 0);
   border-radius: 50%;
   padding: 2px 7px;
@@ -159,10 +170,11 @@ export default {
 }
 
 
-.head-w{
+.head-w {
   color: #333;
 }
-.header-btn:hover + .head-w {
+
+.header-btn:hover+.head-w {
   color: #53fc5b;
   transition: all 0.5s ease-in-out;
 }
@@ -341,9 +353,10 @@ export default {
   i:hover {
     color: #53fc5b;
     transition: all 0.3s ease-in-out;
-    
+
   }
-  i:hover > span{
+
+  i:hover>span {
     color: white;
   }
 }
@@ -466,7 +479,7 @@ img {
   background: #64646421;
   margin: 0 0.25rem;
   color: color(#575756 a(0.8));
-  
+
 
   span {
     padding-left: 0.5rem
@@ -474,8 +487,8 @@ img {
 }
 
 a {
-    color: rgb(22 21 21);
-    text-decoration: underline;
+  color: rgb(22 21 21);
+  text-decoration: underline;
 }
 
 .header-btn:hover {
@@ -488,22 +501,23 @@ a {
   }
 }
 
-.header-btn-login:hover{
+.header-btn-login:hover {
 
   border-style: none !important;
   background: none;
   transition: all 0.5s ease-in-out !important;
   border: 1px solid #646464 !important;
-  outline: none !important; 
+  outline: none !important;
+
   span {
     color: #646464;
   }
 }
 
 @media screen and (max-width: 768px) {
-  
+
   .cart-icon {
-    
+
     top: 5px;
     right: 23px !important;
     width: 15px;
@@ -538,7 +552,7 @@ a {
 
 @media screen and (min-width : 1200px) {
   .cart-icon {
-    
+
     top: 5px;
     right: 57px !important;
     width: 15px;

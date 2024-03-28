@@ -81,7 +81,7 @@ h
 <template>
   <div class="nav d-flex justify-content-between align-items-center">
     <router-link :to="{ name: 'home' }">
-      <img src="WHEREFOOD.png" alt="">
+      <img src="/WHEREFOOD.png" alt="">
     </router-link>
     <div class="d-flex align-items-center icon-not">
       <a class="header-btn" href="http://127.0.0.1:8000/"><i class="fa-solid fa-right-to-bracket"></i></a>

@@ -53,8 +53,8 @@ export default {
             </div>
             <div class="f-wrapper">
                 <p class="title">Porta Wherefood con te</p>
-                <img src="appStore.svg.png" alt="">
-                <img src="google-play-badge.png" alt="">
+                <img src="/appStore.svg.png" alt="">
+                <img src="/google-play-badge.png" alt="">
 
             </div>
         </div>

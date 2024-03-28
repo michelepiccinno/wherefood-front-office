@@ -61,11 +61,11 @@ export default {
 <template>
 	<header>
 		<AppHeader />
-
 	</header>
-	<router-view>
 
-	</router-view>
+	<router-view/>	
+
+	
 	<footer>
 		<AppFooter />
 	</footer>

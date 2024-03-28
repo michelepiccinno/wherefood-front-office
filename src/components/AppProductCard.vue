@@ -100,7 +100,7 @@ export default {
                                     @click="addToCart(product);">
                                     Aggiungi al carrello
                                 </button>
-                                <button v-else type="text" class="btn btn-danger" @click="removeFromCart(product)">
+                                <button v-else type="button" class="btn btn-danger" disabled @click="removeFromCart(product)">
                                     Rimuovi dal carrello
                                 </button>
                             </div>

@@ -22,7 +22,7 @@ export default {
 
             this.$router.push({ name: 'products', params: { restaurantId } })
         },
-        findProducts() {
+        /* findProducts() {
             axios.get(`http://127.0.0.1:8000/api/restaurants/${this.restaurant.id}/products`)
                 .then(risultato => {
                     this.store.productsArray = risultato.data.results;
@@ -31,7 +31,7 @@ export default {
                 .catch(error => {
                     console.error(error);
                 });
-        },
+        }, */
     }
 }
 </script>
